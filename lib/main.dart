@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:z_charts/pages/home/home_page.dart';
-import 'package:z_charts/pages/walking/walking_page.dart';
+import 'package:z_charts/pages/product/product_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      initialRoute: '/walking',
+      initialRoute: '/products',
       routes: {
         '/home': (context) => HomePage(),
-        '/walking': (context) => WalkingPage(),
+        '/products': (context) => ProductPage(),
       },
     );
   }

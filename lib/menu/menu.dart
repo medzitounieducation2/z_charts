@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:z_charts/charts/zc3_lines_chart.dart';
 import 'package:z_charts/pages/charts/zc2_line_bar_page.dart';
 import 'package:z_charts/pages/home/home_page.dart';
-import 'package:z_charts/pages/walking/walking_page.dart';
+import 'package:z_charts/pages/product/product_page.dart';
 
 class AppMenu extends StatelessWidget {
   const AppMenu({super.key});
@@ -69,13 +69,13 @@ class AppMenu extends StatelessWidget {
           ListTile(
             title: Row(
               spacing: 10,
-              children: [Icon(Icons.directions_walk), Text('Walking')],
+              children: [Icon(Icons.directions_walk), Text('Product')],
             ),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WalkingPage(),
+                  builder: (context) => ProductPage(),
                 ),
               );
             },
