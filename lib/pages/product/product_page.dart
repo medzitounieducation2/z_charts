@@ -103,6 +103,19 @@ class _ProductPageState extends State<ProductPage> {
                   },
                   child: Text('500'),
                 ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: count == 1000 ? Colors.green : null,
+                  ),
+                  onPressed: () {
+                    productService.buildItems(1000);
+                    loadData();
+                    setState(() {
+                      count = 1000;
+                    });
+                  },
+                  child: Text('1000'),
+                ),
               ],
             ),
 
