@@ -20,6 +20,7 @@ class _ProductPageState extends State<ProductPage> {
   ProductChartsService productChartsService = ProductChartsService();
   var miniChartKey = GlobalKey<ZMiniDynamicChartViewState>();
   int count = 50;
+  int max = 10;
 
   @override
   void initState() {
@@ -49,8 +50,56 @@ class _ProductPageState extends State<ProductPage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            Row(children: [
+              Text('Max: '),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: max == 10 ? Colors.green : null,
+                ),
+                onPressed: () {
+                  setState(() {
+                    max = 10;
+                  });
+                },
+                child: Text('10'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: max == 100 ? Colors.green : null,
+                ),
+                onPressed: () {
+                  setState(() {
+                    max = 100;
+                  });
+                },
+                child: Text('100'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: max == 1000 ? Colors.green : null,
+                ),
+                onPressed: () {
+                  setState(() {
+                    max = 1000;
+                  });
+                },
+                child: Text('1000'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: max == 10000 ? Colors.green : null,
+                ),
+                onPressed: () {
+                  setState(() {
+                    max = 10000;
+                  });
+                },
+                child: Text('10000'),
+              ),
+            ],),
             Row(
               children: [
+                Text('LEN: '),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: count == 10 ? Colors.green : null,
