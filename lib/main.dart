@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:z_charts/pages/home/home_page.dart';
 import 'package:z_charts/pages/product/product_page.dart';
 
 void main() {
@@ -30,7 +29,6 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/products',
       routes: {
-        '/home': (context) => HomePage(),
         '/products': (context) => ProductPage(),
       },
     );
