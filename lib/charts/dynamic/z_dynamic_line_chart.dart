@@ -107,7 +107,7 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
                 textStyle,
                 children: <TextSpan>[
                   TextSpan(
-                    text: '${touchedSpot.y} ${widget.unit}',
+                    text: '${touchedSpot.y.toStringAsFixed(2)} ${widget.unit}',
                     style: const TextStyle(
                       color: Colors.white, //widget.touchedBarColor,
                       fontSize: 12,

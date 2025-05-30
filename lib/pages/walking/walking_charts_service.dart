@@ -6,7 +6,7 @@ class WalkingChartsService extends ZChartsService<Walking>{
   List<Map<String, dynamic>> convertEntities(List<Walking> entities) {
     var result = entities.map((Walking entity) {
       var obj = {
-        'value': entity.value.toDouble() / 1000,
+        'value': entity.value.toDouble() / 10,
         'timestamp': entity.timestamp,
       };
       return obj;
