@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:z_charts/charts/views/z_mini_dynamic_chart_view.dart';
 import 'package:z_charts/menu/menu.dart';
@@ -16,6 +18,7 @@ class _WalkingPageState extends State<WalkingPage> {
   List<Walking> items = [];
   WalkingService walkingService = WalkingService();
   WalkingChartsService walkingChartsService = WalkingChartsService();
+  var miniChartKey = GlobalKey<ZMiniDynamicChartViewState>();
 
   @override
   void initState() {
@@ -44,6 +47,7 @@ class _WalkingPageState extends State<WalkingPage> {
         child: Column(
           children: [
             ZMiniDynamicChartView(
+              key: miniChartKey,
               pageId: 'walking',
               unit: 'step',
               label: 'Walking chart',
@@ -61,7 +65,7 @@ class _WalkingPageState extends State<WalkingPage> {
               elevation: 2,
               child: ExpansionTile(
                 title: Text(
-                  'All walking',
+                  'All walking ${items.length}',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 initiallyExpanded: true,
@@ -85,6 +89,22 @@ class _WalkingPageState extends State<WalkingPage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final random = Random();
+          final value = random.nextDouble() * 50 + 10;
+          final randomDay = random.nextInt(50);
+          final randomHour = random.nextInt(24);
+          final date = DateTime.now().subtract(Duration(days: randomDay, hours: randomHour));
+          var walking = Walking(unit: 'step', value: value, timestamp: date, id: null);
+          walkingService.addEntity(walking).then((res) {
+            loadData();
+            miniChartKey.currentState?.refreshChart();
+          });
+        },
+        tooltip: 'Add New Walking',
+        child: const Icon(Icons.add),
       ),
     );
   }

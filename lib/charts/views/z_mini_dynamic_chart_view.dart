@@ -14,12 +14,13 @@ class ZMiniDynamicChartView extends StatefulWidget {
   const ZMiniDynamicChartView({super.key, required this.pageId, required this.unit, required this.label, required this.dataService, required this.chartsService});
 
   @override
-  State<ZMiniDynamicChartView> createState() => _ZMiniDynamicChartViewState();
+  State<ZMiniDynamicChartView> createState() => ZMiniDynamicChartViewState();
 }
 
-class _ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
+class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
   ZDynamicChart? dynamicChart;
   ZChartParams? chartParams;
+  var dynamicChartKey = GlobalKey<ZDynamicChartState>();
 
   @override
   void initState() {
@@ -35,12 +36,20 @@ class _ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
     );
 
     dynamicChart = ZDynamicChart(
+      key: dynamicChartKey,
       chartParams: chartParams!,
       dataService: widget.dataService,
       chartsService: widget.chartsService,
       unit: widget.unit,
     );
+  }
 
+  buildChart() {
+
+  }
+
+  refreshChart() {
+    dynamicChartKey.currentState?.refreshChart();
   }
 
   @override

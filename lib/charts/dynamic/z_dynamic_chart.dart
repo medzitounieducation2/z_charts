@@ -15,15 +15,19 @@ class ZDynamicChart extends StatefulWidget {
   const ZDynamicChart({super.key, required this.chartParams, required this.dataService, required this.chartsService, required this.unit});
 
   @override
-  State<ZDynamicChart> createState() => _ZDynamicChartState();
+  State<ZDynamicChart> createState() => ZDynamicChartState();
 }
 
-class _ZDynamicChartState extends State<ZDynamicChart> {
+class ZDynamicChartState extends State<ZDynamicChart> {
   List<Map<String, dynamic>>? dataList;
 
   @override
   void initState() {
     super.initState();
+    loadChartData();
+  }
+
+  refreshChart() {
     loadChartData();
   }
 
