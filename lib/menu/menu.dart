@@ -25,7 +25,7 @@ class AppMenu extends StatelessWidget {
           ListTile(
             title: Row(
               spacing: 10,
-              children: [Icon(Icons.directions_walk), Text('Product')],
+              children: [Icon(Icons.production_quantity_limits), Text('Product')],
             ),
             onTap: () {
               Navigator.push(
