@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/package/charts/z_dynamic_chart.dart';
+import 'package:z_charts/package/factories/z_params_service_factory.dart';
 import 'package:z_charts/package/models/z_chart_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
 
@@ -23,26 +24,47 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
   @override
   void initState() {
     super.initState();
-    chartParams = ZChartParams(
-      id: 1,
-      periodType: 'this_year',
-      pageId: widget.pageId,
-      timeUnit: 'day',
-      chartType: 'bar',
-      fromDate: DateTime.now(),
-      toDate: DateTime.now(),
-    );
-
-    dynamicChart = ZDynamicChart(
-      key: dynamicChartKey,
-      chartParams: chartParams!,
-      dataService: widget.dataService,
-      unit: widget.unit,
-    );
+    loadChartParams();
   }
 
   loadChartParams() {
-
+    var service = ZParamsServiceFactory.paramsService(context);
+    service.getByPageId(widget.pageId)
+    .then((savedParams) {
+      if(savedParams == null) {
+        var params = ZChartParams(
+          id: 1,
+          periodType: 'this_month',
+          pageId: widget.pageId,
+          timeUnit: 'day',
+          chartType: 'line',
+          fromDate: DateTime.now(),
+          toDate: DateTime.now(),
+        );
+        service.addEntity(params)
+        .then((newSaved) {
+          setState(() {
+            chartParams = savedParams;
+            dynamicChart = ZDynamicChart(
+              key: dynamicChartKey,
+              chartParams: newSaved,
+              dataService: widget.dataService,
+              unit: widget.unit,
+            );
+          });
+        });
+      } else {
+        setState(() {
+          chartParams = savedParams;
+          dynamicChart = ZDynamicChart(
+            key: dynamicChartKey,
+            chartParams: savedParams,
+            dataService: widget.dataService,
+            unit: widget.unit,
+          );
+        });
+      }
+    });
   }
   refreshChart() {
     dynamicChartKey.currentState?.refreshChart();

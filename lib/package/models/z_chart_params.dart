@@ -1,7 +1,7 @@
 import 'package:z_charts/package/models/z_data_model.dart';
 
 class ZChartParams extends ZDataModel {
-  String pageId;
+  dynamic pageId;
   DateTime fromDate;
   DateTime toDate;
   String periodType;

@@ -38,12 +38,6 @@ class ProductService extends ZDataService<Product> {
   }
 
   @override
-  Future<List<Product>> fetchByIds(List<String> docIds) async {
-    final ids = docIds.map(int.parse).toSet();
-    return data.where((item) => ids.contains(item.id)).toList();
-  }
-
-  @override
   Future<List<Product>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) async {
     return data.where((item) =>
     item.timestamp.isAfter(startDate) && item.timestamp.isBefore(endDate)
@@ -56,14 +50,14 @@ class ProductService extends ZDataService<Product> {
   }
 
   @override
-  Future<Product?> getEntityById(String id) async {
+  Future<Product?> getEntityById(dynamic id) async {
     final intId = int.tryParse(id);
     return data.firstWhere((item) => item.id == intId);
   }
 
   @override
-  Future<void> updateEntity(String docId, Product newValue) async {
-    final intId = int.tryParse(docId);
+  Future<void> updateEntity(dynamic id, Product newValue) async {
+    final intId = int.tryParse(id);
     final index = data.indexWhere((item) => item.id == intId);
     if (index != -1) {
       data[index] = newValue;

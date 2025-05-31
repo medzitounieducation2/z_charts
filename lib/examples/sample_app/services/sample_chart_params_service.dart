@@ -23,12 +23,6 @@ class SampleChartParamsService extends ZParamsService {
   }
 
   @override
-  Future<List<ZChartParams>> fetchByIds(List<String> docIds) async {
-    final ids = docIds.map(int.parse).toSet();
-    return data.where((item) => ids.contains(item.id)).toList();
-  }
-
-  @override
   Future<List<ZChartParams>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) async {
     return data.where((item) =>
     item.fromDate.isAfter(startDate) && item.fromDate.isBefore(endDate)
@@ -41,14 +35,14 @@ class SampleChartParamsService extends ZParamsService {
   }
 
   @override
-  Future<ZChartParams?> getEntityById(String id) async {
+  Future<ZChartParams?> getEntityById(dynamic id) async {
     final intId = int.tryParse(id);
     return data.firstWhere((item) => item.id == intId);
   }
 
   @override
-  Future<void> updateEntity(String docId, ZChartParams newValue) async {
-    final intId = int.tryParse(docId);
+  Future<void> updateEntity(dynamic id, ZChartParams newValue) async {
+    final intId = int.tryParse(id);
     final index = data.indexWhere((item) => item.id == intId);
     if (index != -1) {
       data[index] = newValue;
@@ -58,5 +52,10 @@ class SampleChartParamsService extends ZParamsService {
   @override
   List<Map<String, dynamic>> adaptData(List<ZChartParams> data) {
     return [];
+  }
+
+  @override
+  Future<ZChartParams?> getByPageId(dynamic pageId) async {
+    return data.firstWhere((item) => item.pageId == pageId);
   }
 }
