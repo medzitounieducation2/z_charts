@@ -81,8 +81,10 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
           ),
         ),
       ),
-      borderData: FlBorderData(show: false),
-      /*gridData: const FlGridData(show: false),*/
+      borderData: FlBorderData(
+        show: true,
+        border: Border.all(color: const Color(0xff37434d)),
+      ),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
