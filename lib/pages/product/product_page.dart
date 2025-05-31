@@ -205,7 +205,7 @@ class _ProductPageState extends State<ProductPage> {
                       final item = items[index];
                       return Card(
                         child: ListTile(
-                          title: Text('${item.value}'),
+                          title: Text(item.value.toStringAsFixed(2)),
                           subtitle: Text('${item.timestamp}'),
                         ),
                       );
