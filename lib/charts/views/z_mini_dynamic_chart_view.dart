@@ -74,8 +74,8 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
                   child: dynamicChart ?? SizedBox(),
                 ),
                 Positioned(
-                  top: 0,
-                  right: 0,
+                  top: -10,
+                  right: -12,
                   child: IconButton(
                     icon: const Icon(Icons.settings), //Icons.open_in_full
                     onPressed: () {},

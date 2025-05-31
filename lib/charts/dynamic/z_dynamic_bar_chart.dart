@@ -21,14 +21,13 @@ class ZDynamicBarChart extends StatefulWidget {
 }
 
 class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
-  Map<int, String>? verticalAxesMap;
+  Map<int, int>? verticalAxesMap;
 
   @override
   Widget build(BuildContext context) {
     verticalAxesMap = betterInts(
       widget.chartConfig.minValue,
       widget.chartConfig.maxValue,
-      widget.unit,
     );
 
     return Padding(
@@ -151,13 +150,13 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 10);
 
-    String? text = verticalAxesMap![value.toInt()];
+    int? val = verticalAxesMap![value.toInt()];
 
-    if (text == null || value.toInt() >= (widget.chartConfig.maxValue * 1.03)) {
+    if (val == null || value.toInt() >= (widget.chartConfig.maxValue * 1.03)) {
       return Container();
     }
 
-    return Text(text, style: style, textAlign: TextAlign.left);
+    return Text('$val', style: style, textAlign: TextAlign.left);
   }
 
   BarChartGroupData makeGroupData(int x, double y) {

@@ -50,6 +50,5 @@ class ZChartDataUtils {
       }
     }
     return groupedData.values.toList();
-    //return filteredData;
   }
 }

@@ -23,14 +23,13 @@ class ZDynamicLineChart extends StatefulWidget {
 class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
   final List<Color> gradientColors = [Colors.cyanAccent, Colors.blueAccent];
 
-  Map<int, String>? verticalAxesMap;
+  Map<int, int>? verticalAxesMap;
 
   @override
   Widget build(BuildContext context) {
     verticalAxesMap = betterInts(
       widget.chartConfig.minValue,
       widget.chartConfig.maxValue,
-      widget.unit,
     );
     return Padding(
       padding: const EdgeInsets.only(right: 18, left: 12, top: 24, bottom: 12),
@@ -48,18 +47,6 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
       text = Text(str, style: style);
     }
     return SideTitleWidget(meta: meta, child: text);
-  }
-
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 10);
-
-    String? text = verticalAxesMap![value.toInt()];
-
-    if (text == null || value.toInt() >= (widget.chartConfig.maxValue * 1.03)) {
-      return Container();
-    }
-
-    return Text(text, style: style, textAlign: TextAlign.left);
   }
 
   LineChartData mainData() {
@@ -123,8 +110,6 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
-        horizontalInterval: widget.chartConfig.horizontalInterval ?? 1,
-        verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
           return const FlLine(color: Colors.grey, strokeWidth: 1);
         },
@@ -141,17 +126,21 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            reservedSize: 30,
-            interval: widget.data.length / 7,
+            /*reservedSize: 30,*/
+            /*interval: widget.data.length / 7,*/
             getTitlesWidget: bottomTitleWidgets,
           ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 1,
-            getTitlesWidget: leftTitleWidgets,
-            reservedSize: 42,
+            getTitlesWidget: (value, meta) {
+              String formatted = value >= 1000
+                  ? '${(value / 1000).toStringAsFixed(1)}K'
+                  : value.toStringAsFixed(0);
+              return Text(formatted, style: TextStyle(fontSize: 10));
+            },
+            reservedSize: 35,
           ),
         ),
       ),
@@ -170,8 +159,7 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
           }),
           isCurved: true,
           gradient: LinearGradient(colors: gradientColors),
-          barWidth: 5,
-          // dataList.length + 1
+          barWidth: 3,
           isStrokeCapRound: true,
           dotData: const FlDotData(show: false),
           belowBarData: BarAreaData(
