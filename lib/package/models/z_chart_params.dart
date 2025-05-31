@@ -8,6 +8,16 @@ class ZChartParams extends ZDataModel {
   String chartType;
   String timeUnit;
 
+  static ZChartParams empty() => ZChartParams(
+    id: 1,
+    periodType: 'this_month',
+    pageId: '',
+    timeUnit: 'day',
+    chartType: 'line',
+    fromDate: DateTime.now(),
+    toDate: DateTime.now(),
+  );
+
   ZChartParams({
     required super.id,
     required this.pageId,

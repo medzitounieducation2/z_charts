@@ -41,15 +41,8 @@ class _ZFullDynamicChartViewState extends State<ZFullDynamicChartView> {
     var service = ZParamsServiceFactory.paramsService(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
-        var params = ZChartParams(
-          id: 1,
-          periodType: 'this_month',
-          pageId: widget.pageId,
-          timeUnit: 'day',
-          chartType: 'line',
-          fromDate: DateTime.now(),
-          toDate: DateTime.now(),
-        );
+        var params = ZChartParams.empty();
+        params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {
             chartParams = savedParams;
