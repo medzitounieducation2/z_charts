@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/models/z_chart_data_config.dart';
-import 'package:z_charts/utils/z_better_ints.dart';
 
 class ZDynamicBarChart extends StatefulWidget {
   final List<Map<String, dynamic>> data;
@@ -21,15 +20,9 @@ class ZDynamicBarChart extends StatefulWidget {
 }
 
 class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
-  Map<int, int>? verticalAxesMap;
 
   @override
   Widget build(BuildContext context) {
-    verticalAxesMap = betterInts(
-      widget.chartConfig.minValue,
-      widget.chartConfig.maxValue,
-    );
-
     return Padding(
       padding: const EdgeInsets.only(right: 18, left: 12, top: 24, bottom: 12),
       child: BarChart(mainData()),
@@ -72,21 +65,35 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 30,
-            interval: widget.data.length / 7,
+            /*interval: widget.data.length / 7,*/
             getTitlesWidget: bottomTitleWidgets,
           ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 1,
-            getTitlesWidget: leftTitleWidgets,
-            reservedSize: 42,
+            getTitlesWidget: (value, meta) {
+              String formatted = value >= 1000
+                  ? '${(value / 1000).toStringAsFixed(1)}K'
+                  : value.toStringAsFixed(0);
+              return Text(formatted, style: TextStyle(fontSize: 10));
+            },
+            reservedSize: 35,
           ),
         ),
       ),
       borderData: FlBorderData(show: false),
-      gridData: const FlGridData(show: false),
+      /*gridData: const FlGridData(show: false),*/
+      gridData: FlGridData(
+        show: true,
+        drawVerticalLine: true,
+        getDrawingHorizontalLine: (value) {
+          return const FlLine(color: Colors.grey, strokeWidth: 1);
+        },
+        getDrawingVerticalLine: (value) {
+          return const FlLine(color: Colors.grey, strokeWidth: 1);
+        },
+      ),
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
           tooltipPadding: EdgeInsets.all(3.0),
@@ -105,17 +112,17 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
             final textStyle = TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              fontSize: 10,
             );
             return BarTooltipItem(
               '$day\n',
               textStyle,
               children: <TextSpan>[
                 TextSpan(
-                  text: '${rod.toY} ${widget.unit}',
+                  text: '${rod.toY.toStringAsFixed(2)} ${widget.unit}',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -129,8 +136,14 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     var jump = 1;
-    if (widget.data.length > 10) {
-      jump = 3;
+    if (widget.data.length > 300) {
+      jump = 30;
+    } if (widget.data.length > 150) {
+      jump = 20;
+    } if (widget.data.length > 50) {
+      jump = 10;
+    } else if (widget.data.length > 10) {
+      jump = 5;
     }
     if (value.toInt() % jump != 0) {
       return const SizedBox.shrink();
@@ -140,23 +153,11 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
     if (value.toInt() < widget.data.length) {
       // dayOfTheWeekShort
       var str = DateFormat(
-        'EE dd/MM',
+        'dd/MM',
       ).format(widget.data[value.toInt()]['timestamp']);
       text = Text(str, style: style);
     }
     return SideTitleWidget(meta: meta, child: text);
-  }
-
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 10);
-
-    int? val = verticalAxesMap![value.toInt()];
-
-    if (val == null || value.toInt() >= (widget.chartConfig.maxValue * 1.03)) {
-      return Container();
-    }
-
-    return Text('$val', style: style, textAlign: TextAlign.left);
   }
 
   BarChartGroupData makeGroupData(int x, double y) {
@@ -166,10 +167,21 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
         BarChartRodData(
           toY: y,
           color: Colors.blue,
-          width: 16,
+          width: _getBarWidth(widget.data.length),
           borderRadius: BorderRadius.circular(4),
         ),
       ],
     );
   }
+
+  double _getBarWidth(int length) {
+    if(length>70) {
+      return 4;
+    } if(length>30) {
+      return 8;
+    }
+    return 16;
+  }
 }
+
+

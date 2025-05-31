@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/models/z_chart_data_config.dart';
-import 'package:z_charts/utils/z_better_ints.dart';
 
 class ZDynamicLineChart extends StatefulWidget {
   final List<Map<String, dynamic>> data;
@@ -23,14 +22,8 @@ class ZDynamicLineChart extends StatefulWidget {
 class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
   final List<Color> gradientColors = [Colors.cyanAccent, Colors.blueAccent];
 
-  Map<int, int>? verticalAxesMap;
-
   @override
   Widget build(BuildContext context) {
-    verticalAxesMap = betterInts(
-      widget.chartConfig.minValue,
-      widget.chartConfig.maxValue,
-    );
     return Padding(
       padding: const EdgeInsets.only(right: 18, left: 12, top: 24, bottom: 12),
       child: LineChart(mainData()),
@@ -87,7 +80,7 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
               final textStyle = TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 10,
               );
               return LineTooltipItem(
                 '$weekDay\n',
@@ -97,7 +90,7 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
                     text: '${touchedSpot.y.toStringAsFixed(2)} ${widget.unit}',
                     style: const TextStyle(
                       color: Colors.white, //widget.touchedBarColor,
-                      fontSize: 12,
+                      fontSize: 10,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
