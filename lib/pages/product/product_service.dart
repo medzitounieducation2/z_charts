@@ -74,7 +74,7 @@ class ProductService extends ZDataService<Product> {
   List<Map<String, dynamic>> adaptData(List<Product> data) {
     return data.map((Product entity) {
       var obj = {
-        'value': entity.value.toDouble() / 10,
+        'value': entity.value.toDouble(),
         'timestamp': entity.timestamp,
       };
       return obj;
