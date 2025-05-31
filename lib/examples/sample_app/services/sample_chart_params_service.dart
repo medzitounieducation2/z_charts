@@ -56,6 +56,10 @@ class SampleChartParamsService extends ZParamsService {
 
   @override
   Future<ZChartParams?> getByPageId(dynamic pageId) async {
-    return data.firstWhere((item) => item.pageId == pageId);
+    var found = data.where((item) => item.pageId == pageId);
+    if(found.isEmpty) {
+      return null;
+    }
+    return found.first;
   }
 }
