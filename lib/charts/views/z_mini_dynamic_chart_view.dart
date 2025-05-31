@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/charts/dynamic/z_dynamic_chart.dart';
 import 'package:z_charts/models/z_chart_params.dart';
-import 'package:z_charts/services/z_charts_service.dart';
 import 'package:z_charts/services/z_data_service.dart';
 
 class ZMiniDynamicChartView extends StatefulWidget {
@@ -9,9 +8,8 @@ class ZMiniDynamicChartView extends StatefulWidget {
   final String unit;
   final String label;
   final ZDataService dataService;
-  final ZChartsService chartsService;
 
-  const ZMiniDynamicChartView({super.key, required this.pageId, required this.unit, required this.label, required this.dataService, required this.chartsService});
+  const ZMiniDynamicChartView({super.key, required this.pageId, required this.unit, required this.label, required this.dataService});
 
   @override
   State<ZMiniDynamicChartView> createState() => ZMiniDynamicChartViewState();
@@ -39,7 +37,6 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
       key: dynamicChartKey,
       chartParams: chartParams!,
       dataService: widget.dataService,
-      chartsService: widget.chartsService,
       unit: widget.unit,
     );
   }

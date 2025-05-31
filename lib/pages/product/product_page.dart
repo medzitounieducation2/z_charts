@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:z_charts/charts/views/z_mini_dynamic_chart_view.dart';
 import 'package:z_charts/menu/menu.dart';
 import 'package:z_charts/pages/product/product.dart';
-import 'package:z_charts/pages/product/product_charts_service.dart';
 import 'package:z_charts/pages/product/product_service.dart';
 
 class ProductPage extends StatefulWidget {
@@ -17,15 +16,14 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   List<Product> items = [];
   ProductService productService = ProductService();
-  ProductChartsService productChartsService = ProductChartsService();
   var miniChartKey = GlobalKey<ZMiniDynamicChartViewState>();
   int count = 50;
-  int max = 10;
+  int mltp = 1;
 
   @override
   void initState() {
     super.initState();
-    productService.buildItems(count);
+    productService.buildItems(count, mltp);
     loadData();
   }
 
@@ -51,50 +49,58 @@ class _ProductPageState extends State<ProductPage> {
         child: Column(
           children: [
             Row(children: [
-              Text('Max: '),
+              Text('MLTP: '),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: max == 10 ? Colors.green : null,
+                  backgroundColor: mltp == 1 ? Colors.green : null,
                 ),
                 onPressed: () {
+                  productService.buildItems(count, 1);
+                  loadData();
                   setState(() {
-                    max = 10;
+                    mltp = 1;
+                  });
+                },
+                child: Text('1'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: mltp == 10 ? Colors.green : null,
+                ),
+                onPressed: () {
+                  productService.buildItems(count, 10);
+                  loadData();
+                  setState(() {
+                    mltp = 10;
                   });
                 },
                 child: Text('10'),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: max == 100 ? Colors.green : null,
+                  backgroundColor: mltp == 100 ? Colors.green : null,
                 ),
                 onPressed: () {
+                  productService.buildItems(count, 100);
+                  loadData();
                   setState(() {
-                    max = 100;
+                    mltp = 100;
                   });
                 },
                 child: Text('100'),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: max == 1000 ? Colors.green : null,
+                  backgroundColor: mltp == 1000 ? Colors.green : null,
                 ),
                 onPressed: () {
+                  productService.buildItems(count, 1000);
+                  loadData();
                   setState(() {
-                    max = 1000;
+                    mltp = 1000;
                   });
                 },
                 child: Text('1000'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: max == 10000 ? Colors.green : null,
-                ),
-                onPressed: () {
-                  setState(() {
-                    max = 10000;
-                  });
-                },
-                child: Text('10000'),
               ),
             ],),
             Row(
@@ -105,7 +111,7 @@ class _ProductPageState extends State<ProductPage> {
                     backgroundColor: count == 10 ? Colors.green : null,
                   ),
                   onPressed: () {
-                    productService.buildItems(10);
+                    productService.buildItems(10, mltp);
                     loadData();
                     setState(() {
                       count = 10;
@@ -118,7 +124,7 @@ class _ProductPageState extends State<ProductPage> {
                     backgroundColor: count == 50 ? Colors.green : null,
                   ),
                   onPressed: () {
-                    productService.buildItems(50);
+                    productService.buildItems(50, mltp);
                     loadData();
                     setState(() {
                       count = 50;
@@ -131,7 +137,7 @@ class _ProductPageState extends State<ProductPage> {
                     backgroundColor: count == 100 ? Colors.green : null,
                   ),
                   onPressed: () {
-                    productService.buildItems(100);
+                    productService.buildItems(100, mltp);
                     loadData();
                     setState(() {
                       count = 100;
@@ -144,7 +150,7 @@ class _ProductPageState extends State<ProductPage> {
                     backgroundColor: count == 500 ? Colors.green : null,
                   ),
                   onPressed: () {
-                    productService.buildItems(500);
+                    productService.buildItems(500, mltp);
                     loadData();
                     setState(() {
                       count = 500;
@@ -157,7 +163,7 @@ class _ProductPageState extends State<ProductPage> {
                     backgroundColor: count == 1000 ? Colors.green : null,
                   ),
                   onPressed: () {
-                    productService.buildItems(1000);
+                    productService.buildItems(1000, mltp);
                     loadData();
                     setState(() {
                       count = 1000;
@@ -174,7 +180,6 @@ class _ProductPageState extends State<ProductPage> {
               unit: 'step',
               label: 'Product chart',
               dataService: productService,
-              chartsService: productChartsService,
             ),
             Card(
               shape: RoundedRectangleBorder(

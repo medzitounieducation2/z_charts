@@ -3,16 +3,14 @@ import 'package:z_charts/charts/dynamic/z_dynamic_bar_chart.dart';
 import 'package:z_charts/charts/dynamic/z_dynamic_line_chart.dart';
 import 'package:z_charts/models/z_chart_data_config.dart';
 import 'package:z_charts/models/z_chart_params.dart';
-import 'package:z_charts/services/z_charts_service.dart';
 import 'package:z_charts/services/z_data_service.dart';
 import 'package:z_charts/utils/z_chart_data_utils.dart';
 
 class ZDynamicChart extends StatefulWidget {
   final ZChartParams chartParams;
   final ZDataService dataService;
-  final ZChartsService chartsService;
   final String unit;
-  const ZDynamicChart({super.key, required this.chartParams, required this.dataService, required this.chartsService, required this.unit});
+  const ZDynamicChart({super.key, required this.chartParams, required this.dataService, required this.unit});
 
   @override
   State<ZDynamicChart> createState() => ZDynamicChartState();
@@ -55,7 +53,7 @@ class ZDynamicChartState extends State<ZDynamicChart> {
           6)); // Sunday of the same week
     }
     widget.dataService.fetchEntitiesBetween(fromDate, toDate).then((entities) {
-      var data = widget.chartsService.convertEntities(entities);
+      var data = widget.dataService.adaptData(entities);
       setState(() {
         dataList = data;
       });

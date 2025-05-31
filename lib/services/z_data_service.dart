@@ -8,4 +8,5 @@ abstract class ZDataService<T extends ZDataModel> {
   Future<List<T>> getEntities();
   Future<List<T>> fetchEntitiesBetween(DateTime startDate, DateTime endDate);
   Future<List<T>> fetchByIds(List<String> docIds);
+  List<Map<String, dynamic>> adaptData(List<T> data);
 }

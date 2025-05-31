@@ -6,11 +6,11 @@ import 'package:z_charts/services/z_data_service.dart';
 class ProductService extends ZDataService<Product> {
   List<Product> data = [];
 
-  buildItems(int count) {
+  buildItems(int count, int mltp) {
     DateTime now = DateTime.now();
     data = List.generate(count, (index) {
       final random = Random();
-      final value = random.nextDouble() * count + 10;
+      final value = (random.nextDouble() * count + 10) * mltp;
       final randomDay = random.nextInt(count);
       final randomHour = random.nextInt(24);
       final date = now.subtract(Duration(days: randomDay, hours: randomHour));
@@ -68,5 +68,16 @@ class ProductService extends ZDataService<Product> {
     if (index != -1) {
       data[index] = newValue;
     }
+  }
+
+  @override
+  List<Map<String, dynamic>> adaptData(List<Product> data) {
+    return data.map((Product entity) {
+      var obj = {
+        'value': entity.value.toDouble() / 10,
+        'timestamp': entity.timestamp,
+      };
+      return obj;
+    }).toList();
   }
 }
