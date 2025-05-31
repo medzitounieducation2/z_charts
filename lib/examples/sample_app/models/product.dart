@@ -1,4 +1,4 @@
-import 'package:z_charts/models/z_data_model.dart';
+import 'package:z_charts/package/models/z_data_model.dart';
 
 class Product extends ZDataModel {
   String unit;
@@ -27,12 +27,12 @@ class Product extends ZDataModel {
   }
 
   @override
-  Product fromJson(Map<String, dynamic> dynamicData, dynamic id) {
+  Product fromJson(Map<String, dynamic> json, dynamic id) {
     return Product(
       id: id,
-      unit: dynamicData['unit'],
-      value: dynamicData['value'],
-      timestamp: dynamicData['timestamp'],
+      unit: json['unit'],
+      value: json['value'],
+      timestamp: json['timestamp'],
     );
   }
 

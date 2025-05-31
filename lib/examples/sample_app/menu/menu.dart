@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/charts/zc3_lines_chart.dart';
-import 'package:z_charts/pages/charts/zc2_line_bar_page.dart';
-import 'package:z_charts/pages/product/product_page.dart';
+import 'package:z_charts/examples/sample_app/pages/product/product_page.dart';
 
 class AppMenu extends StatelessWidget {
   const AppMenu({super.key});
@@ -32,21 +31,6 @@ class AppMenu extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductPage(),
-                ),
-              );
-            },
-          ),
-
-          ListTile(
-            title: Row(
-              spacing: 10,
-              children: [Icon(Icons.stacked_line_chart), Text('Line & Bar')],
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Zc2LineBarPage(),
                 ),
               );
             },

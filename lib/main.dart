@@ -1,10 +1,17 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:z_charts/pages/product/product_page.dart';
+import 'package:provider/provider.dart';
+import 'package:z_charts/examples/sample_app/pages/product/product_page.dart';
+import 'package:z_charts/examples/sample_app/services/sample_chart_params_service.dart';
+import 'package:z_charts/package/services/z_params_service.dart';
 
 void main() {
-  runApp(const MyApp());
+  ZParamsService paramsService = SampleChartParamsService();
+  runApp(Provider<ZParamsService>.value(
+    value: paramsService, // singleton instance
+    child: const MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
