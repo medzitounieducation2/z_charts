@@ -65,7 +65,6 @@ class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
           sideTitles: SideTitles(
             showTitles: true,
             reservedSize: 30,
-            /*interval: widget.data.length / 7,*/
             getTitlesWidget: bottomTitleWidgets,
           ),
         ),
