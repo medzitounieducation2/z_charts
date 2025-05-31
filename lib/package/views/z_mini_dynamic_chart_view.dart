@@ -3,14 +3,21 @@ import 'package:z_charts/package/charts/z_dynamic_chart.dart';
 import 'package:z_charts/package/factories/z_params_service_factory.dart';
 import 'package:z_charts/package/models/z_chart_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
+import 'package:z_charts/package/views/z_full_dynamic_chart_view.dart';
 
 class ZMiniDynamicChartView extends StatefulWidget {
-  final String pageId;
+  final dynamic pageId;
   final String unit;
   final String label;
   final ZDataService dataService;
 
-  const ZMiniDynamicChartView({super.key, required this.pageId, required this.unit, required this.label, required this.dataService});
+  const ZMiniDynamicChartView({
+    super.key,
+    required this.pageId,
+    required this.unit,
+    required this.label,
+    required this.dataService,
+  });
 
   @override
   State<ZMiniDynamicChartView> createState() => ZMiniDynamicChartViewState();
@@ -24,14 +31,13 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
   @override
   void initState() {
     super.initState();
-    loadChartParams();
+    _loadChartParams();
   }
 
-  loadChartParams() {
+  _loadChartParams() {
     var service = ZParamsServiceFactory.paramsService(context);
-    service.getByPageId(widget.pageId)
-    .then((savedParams) {
-      if(savedParams == null) {
+    service.getByPageId(widget.pageId).then((savedParams) {
+      if (savedParams == null) {
         var params = ZChartParams(
           id: 1,
           periodType: 'this_month',
@@ -41,42 +47,43 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
           fromDate: DateTime.now(),
           toDate: DateTime.now(),
         );
-        service.addEntity(params)
-        .then((newSaved) {
+        service.addEntity(params).then((newSaved) {
           setState(() {
             chartParams = savedParams;
-            dynamicChart = ZDynamicChart(
-              key: dynamicChartKey,
-              chartParams: newSaved,
-              dataService: widget.dataService,
-              unit: widget.unit,
-            );
           });
         });
       } else {
         setState(() {
           chartParams = savedParams;
-          dynamicChart = ZDynamicChart(
-            key: dynamicChartKey,
-            chartParams: savedParams,
-            dataService: widget.dataService,
-            unit: widget.unit,
-          );
         });
       }
     });
   }
+
   refreshChart() {
     dynamicChartKey.currentState?.refreshChart();
+  }
+
+  _navigateToFullDynamicChartPage() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => ZFullDynamicChartView(
+              pageId: widget.pageId,
+              dataService: widget.dataService,
+              label: widget.label,
+              unit: widget.unit,
+            ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -87,19 +94,25 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
             ),
             Stack(
               children: [
-                // Placeholder for your chart
-                Container(
-                  height: 250,
-                  color: Colors.grey[200],
-                  alignment: Alignment.center,
-                  child: dynamicChart ?? SizedBox(),
-                ),
+                chartParams == null
+                    ? Container()
+                    : Container(
+                      height: 250,
+                      color: Colors.grey[200],
+                      alignment: Alignment.center,
+                      child: ZDynamicChart(
+                        key: dynamicChartKey,
+                        chartParams: chartParams!,
+                        dataService: widget.dataService,
+                        unit: widget.unit,
+                      ),
+                    ),
                 Positioned(
                   top: -10,
                   right: -12,
                   child: IconButton(
                     icon: const Icon(Icons.settings), //Icons.open_in_full
-                    onPressed: () {},
+                    onPressed: _navigateToFullDynamicChartPage,
                   ),
                 ),
               ],
