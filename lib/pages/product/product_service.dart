@@ -10,7 +10,7 @@ class ProductService extends ZDataService<Product> {
     DateTime now = DateTime.now();
     data = List.generate(count, (index) {
       final random = Random();
-      final value = (random.nextDouble() * count + 10) * mltp;
+      final value = (random.nextDouble() * 50 + 1) * mltp;
       final randomDay = random.nextInt(count);
       final randomHour = random.nextInt(24);
       final date = now.subtract(Duration(days: randomDay, hours: randomHour));
