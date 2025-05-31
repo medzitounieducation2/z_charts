@@ -28,7 +28,7 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
       periodType: 'this_year',
       pageId: widget.pageId,
       timeUnit: 'day',
-      chartType: 'line',
+      chartType: 'bar',
       fromDate: DateTime.now(),
       toDate: DateTime.now(),
     );
@@ -40,11 +40,6 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
       unit: widget.unit,
     );
   }
-
-  buildChart() {
-
-  }
-
   refreshChart() {
     dynamicChartKey.currentState?.refreshChart();
   }
