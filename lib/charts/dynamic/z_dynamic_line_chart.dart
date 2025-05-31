@@ -43,7 +43,7 @@ class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
     Widget text = Text('');
     if (value.toInt() < widget.data.length) {
       var str = DateFormat(
-        'EE dd/MM',
+        'dd/MM',
       ).format(widget.data[value.toInt()]['timestamp']);
       text = Text(str, style: style);
     }
