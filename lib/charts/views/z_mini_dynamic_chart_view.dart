@@ -27,7 +27,7 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
       id: 1,
       periodType: 'this_year',
       pageId: widget.pageId,
-      timeUnit: 'week',
+      timeUnit: 'day',
       chartType: 'line',
       fromDate: DateTime.now(),
       toDate: DateTime.now(),
