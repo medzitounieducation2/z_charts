@@ -105,7 +105,7 @@ class ZMiniChartViewState extends State<ZMiniChartView> {
                   top: -10,
                   right: -12,
                   child: IconButton(
-                    icon: const Icon(Icons.settings), //Icons.open_in_full
+                    icon: const Icon(Icons.fullscreen), //Icons.open_in_full
                     onPressed: _navigateToFullDynamicChartPage,
                   ),
                 ),

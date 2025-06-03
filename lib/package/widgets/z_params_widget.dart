@@ -75,7 +75,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
     return Stack(
       children: [
         SizedBox(
-          width: 180,
+          width: 200,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
             child: Theme(
