@@ -176,7 +176,7 @@ class _ProductPageState extends State<ProductPage> {
 
             ZMiniChartView(
               key: miniChartKey,
-              pageId: 'walking',
+              pageId: 'product',
               unit: 'step',
               label: 'Product chart',
               dataService: productService,
@@ -227,13 +227,13 @@ class _ProductPageState extends State<ProductPage> {
           final date = DateTime.now().subtract(
             Duration(days: randomDay, hours: randomHour),
           );
-          var walking = Product(
+          var product = Product(
             unit: 'step',
             value: value,
             timestamp: date,
             id: null,
           );
-          productService.addEntity(walking).then((res) {
+          productService.addEntity(product).then((res) {
             loadData();
           });
         },

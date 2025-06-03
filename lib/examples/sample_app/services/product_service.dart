@@ -14,8 +14,8 @@ class ProductService extends ZDataService<Product> {
       final randomDay = random.nextInt(count);
       final randomHour = random.nextInt(24);
       final date = now.subtract(Duration(days: randomDay, hours: randomHour));
-      var walking = Product(unit: 'step', value: value, timestamp: date, id: index);
-      return walking;
+      var product = Product(unit: 'step', value: value, timestamp: date, id: index);
+      return product;
     }).toList();
   }
 
