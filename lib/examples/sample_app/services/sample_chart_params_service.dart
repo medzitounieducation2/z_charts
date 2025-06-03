@@ -1,4 +1,4 @@
-import 'package:z_charts/package/models/z_chart_params.dart';
+import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/services/z_params_service.dart';
 
 class SampleChartParamsService extends ZParamsService {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:z_charts/package/charts/z_dynamic_bar_chart.dart';
-import 'package:z_charts/package/charts/z_dynamic_line_chart.dart';
-import 'package:z_charts/package/models/z_chart_data_config.dart';
-import 'package:z_charts/package/models/z_chart_params.dart';
+import 'package:z_charts/package/charts/z_bar_chart.dart';
+import 'package:z_charts/package/charts/z_line_chart.dart';
+import 'package:z_charts/package/models/z_data_config.dart';
+import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
-import 'package:z_charts/package/utils/z_chart_data_utils.dart';
+import 'package:z_charts/package/utils/z_data_utils.dart';
 
 class ZChart extends StatefulWidget {
   final ZParams chartParams;

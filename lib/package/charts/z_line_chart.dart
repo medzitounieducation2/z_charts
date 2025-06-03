@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:z_charts/package/models/z_chart_data_config.dart';
+import 'package:z_charts/package/models/z_data_config.dart';
 
 class ZLineChart extends StatefulWidget {
   final List<Map<String, dynamic>> data;

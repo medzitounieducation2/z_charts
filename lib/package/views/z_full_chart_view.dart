@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:z_charts/package/charts/z_dynamic_chart.dart';
+import 'package:z_charts/package/charts/z_chart.dart';
 import 'package:z_charts/package/factories/z_params_service_factory.dart';
-import 'package:z_charts/package/models/z_chart_params.dart';
+import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
-import 'package:z_charts/package/widgets/z_chart_setting_widget.dart';
+import 'package:z_charts/package/widgets/z_params_widget.dart';
 
 class ZFullChartView extends StatefulWidget {
   final String pageId;

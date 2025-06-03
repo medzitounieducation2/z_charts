@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:z_charts/package/models/z_chart_params.dart';
+import 'package:z_charts/package/models/z_params.dart';
 
 class ZDataUtils {
   List<Map<String, dynamic>> build(
