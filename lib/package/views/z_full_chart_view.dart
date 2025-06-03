@@ -25,7 +25,7 @@ class ZFullChartView extends StatefulWidget {
 }
 
 class _ZFullChartViewState extends State<ZFullChartView> {
-  ZParams? chartParams;
+  ZParams? _zParams;
 
   @override
   void initState() {
@@ -34,10 +34,10 @@ class _ZFullChartViewState extends State<ZFullChartView> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    _loadChartParams();
+    _loadZParams();
   }
 
-  _loadChartParams() {
+  _loadZParams() {
     var service = ZParamsServiceFactory.paramsService(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
@@ -45,12 +45,12 @@ class _ZFullChartViewState extends State<ZFullChartView> {
         params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {
-            chartParams = savedParams;
+            _zParams = newSaved;
           });
         });
       } else {
         setState(() {
-          chartParams = savedParams;
+          _zParams = savedParams;
         });
       }
     });
@@ -78,17 +78,17 @@ class _ZFullChartViewState extends State<ZFullChartView> {
         scrollDirection: Axis.horizontal, // Expands width horizontally
         child: Row(
           children: [
-            chartParams == null
+            _zParams == null
                 ? Container()
                 : ZParamsWidget(
-                  chartParams: chartParams!,
+                  chartParams: _zParams!,
                   settingOutput: (data) {
                     setState(() {
-                      chartParams = data;
+                      _zParams = data;
                     });
                   },
                 ),
-            chartParams == null
+            _zParams == null
                 ? Container()
                 : SizedBox(
                   width: 600,
@@ -96,7 +96,7 @@ class _ZFullChartViewState extends State<ZFullChartView> {
                     child: Padding(
                       padding: const EdgeInsets.all(1.0),
                       child: ZChart(
-                        chartParams: chartParams!,
+                        chartParams: _zParams!,
                         dataService: widget.dataService,
                         unit: widget.unit,
                       ),
