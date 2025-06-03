@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:z_charts/package/charts/z_chart.dart';
-import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/factories/z_params_service_factory.dart';
 import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';

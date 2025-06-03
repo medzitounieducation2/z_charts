@@ -4,6 +4,7 @@ import 'package:z_charts/package/dialogs/date_picker.dart';
 import 'package:z_charts/package/enums/chart_type_enum.dart';
 import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/enums/time_unit_enum.dart';
+import 'package:z_charts/package/factories/z_params_service_factory.dart';
 import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/utils/period_dates_util.dart';
 
@@ -30,47 +31,10 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
     params = ZParams.clone(widget.chartParams);
   }
 
-  /*void _updateStateFromSettings(List<ChartSetting> settings) {
-    var foundDefault = settings.firstWhere((obj) => obj.isDefault);
-    var foundWelcome = settings.firstWhere((obj) => obj.isWelcome);
-
-    setState(() {
-      defaultSetting = foundDefault;
-      welcomeSetting = foundWelcome;
-      savedSetting = foundDefault;
-      setting = ChartSetting.clone(foundDefault);
-      pageSettings = settings;
-      widget.settingOutput(setting!);
-    });
+  saveParams() async {
+    var service = ZParamsServiceFactory.paramsService(context);
+    await service.updateEntity(params!.id, params!);
   }
-
-  void openSaveSettingDialog() {
-    showDialog(
-      context: context,
-      builder:
-          (context) => SaveSettingDialog(
-            setting: setting!,
-            defaultSetting: defaultSetting!,
-            welcomeSetting: welcomeSetting!,
-            settingSavedOutput: _settingSavedFromDialog,
-          ),
-    );
-  }
-
-  _settingSavedFromDialog(isUpdated) {
-    initSettings();
-  }
-
-  selectSetting(name) {
-    if (pageSettings!.isNotEmpty) {
-      var found = pageSettings!.firstWhere((obj) => obj.name == name);
-      setState(() {
-        savedSetting = found;
-        setting = ChartSetting.clone(found);
-        widget.settingOutput(found);
-      });
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -434,7 +398,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
             width: 32, // Smaller width
             height: 32, // Smaller height
             child: IconButton(
-              onPressed: () {},
+              onPressed: saveParams,
               icon: Icon(
                 Icons.save,
                 size: 18, // Smaller icon size
