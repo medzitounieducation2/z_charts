@@ -149,10 +149,10 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                     DateFormat(
                                       'yyyy-MM-dd',
                                     ).format(params!.fromDate),
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                 ),
-                                Text('-', style: TextStyle(fontSize: 12)),
+                                Text('-', style: TextStyle(fontSize: 10)),
                                 TextButton(
                                   onPressed:
                                       () => datePicker(
@@ -184,7 +184,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                     DateFormat(
                                       'yyyy-MM-dd',
                                     ).format(params!.toDate),
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                 ),
                               ],
@@ -216,7 +216,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                   ),
                                   child: Text(
                                     'This year',
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                 ),
                                 TextButton(
@@ -243,7 +243,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                   ),
                                   child: Text(
                                     'This month',
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                 ),
                               ],
@@ -276,7 +276,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                   ),
                                   child: Text(
                                     'This week',
-                                    style: TextStyle(fontSize: 12),
+                                    style: TextStyle(fontSize: 10),
                                   ),
                                 ),
                               ],
