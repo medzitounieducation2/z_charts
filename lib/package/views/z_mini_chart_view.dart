@@ -24,17 +24,16 @@ class ZMiniChartView extends StatefulWidget {
 }
 
 class ZMiniChartViewState extends State<ZMiniChartView> {
-  ZChart? chart;
-  ZParams? chartParams;
+  ZParams? _zParams;
   var chartKey = GlobalKey<ZChartState>();
 
   @override
   void initState() {
     super.initState();
-    _loadChartParams();
+    _loadZParams();
   }
 
-  _loadChartParams() {
+  _loadZParams() {
     var service = ZParamsServiceFactory.paramsService(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
@@ -42,12 +41,12 @@ class ZMiniChartViewState extends State<ZMiniChartView> {
         params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {
-            chartParams = savedParams;
+            _zParams = newSaved;
           });
         });
       } else {
         setState(() {
-          chartParams = savedParams;
+          _zParams = savedParams;
         });
       }
     });
@@ -87,15 +86,17 @@ class ZMiniChartViewState extends State<ZMiniChartView> {
             ),
             Stack(
               children: [
-                chartParams == null
-                    ? Container()
+                _zParams == null
+                    ? Center(
+                      child: Text('Error', style: TextStyle(color: Colors.red)),
+                    )
                     : Container(
                       height: 250,
                       color: Colors.grey[200],
                       alignment: Alignment.center,
                       child: ZChart(
                         key: chartKey,
-                        chartParams: chartParams!,
+                        chartParams: _zParams!,
                         dataService: widget.dataService,
                         unit: widget.unit,
                       ),

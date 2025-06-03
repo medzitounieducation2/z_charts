@@ -181,6 +181,7 @@ class _ProductPageState extends State<ProductPage> {
               label: 'Product chart',
               dataService: productService,
             ),
+
             Card(
               shape: RoundedRectangleBorder(
                 side: BorderSide(
