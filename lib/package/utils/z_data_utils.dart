@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:z_charts/package/enums/time_unit_enum.dart';
 import 'package:z_charts/package/models/z_params.dart';
 
 class ZDataUtils {
@@ -14,33 +15,33 @@ class ZDataUtils {
       String key;
       DateTime newTimestamp;
 
-      switch (setting.timeUnit) {
-        case 'hour':
+      TimeUnitEnum timeUnit = TimeUnitEnum.values.where((item) => item.name == setting.timeUnit).first;
+
+      switch (timeUnit) {
+        case TimeUnitEnum.HOUR:
           key = DateFormat('yyyy-MM-dd HH').format(timestamp);
           newTimestamp = DateTime(
               timestamp.year, timestamp.month, timestamp.day, timestamp.hour);
           break;
-        case 'day':
+        case TimeUnitEnum.DAY:
           key = DateFormat('yyyy-MM-dd').format(timestamp);
           newTimestamp = DateTime(
               timestamp.year, timestamp.month, timestamp.day, 12, 0); // Midday
           break;
-        case 'week':
+        case TimeUnitEnum.WEEK:
           DateTime monday =
               timestamp.subtract(Duration(days: timestamp.weekday - 1));
           key = DateFormat('yyyy-MM-dd').format(monday);
           newTimestamp = monday;
           break;
-        case 'month':
+        case TimeUnitEnum.MONTH:
           key = '${timestamp.year}-${timestamp.month}';
           newTimestamp = DateTime(timestamp.year, timestamp.month, 1);
           break;
-        case 'year':
+        case TimeUnitEnum.YEAR:
           key = '${timestamp.year}';
           newTimestamp = DateTime(timestamp.year, 1, 1);
           break;
-        default:
-          throw ArgumentError('Invalid time unit: ${setting.timeUnit}');
       }
 
       if (groupedData.containsKey(key)) {

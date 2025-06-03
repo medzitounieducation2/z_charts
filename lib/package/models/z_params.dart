@@ -1,4 +1,5 @@
 import 'package:z_charts/package/enums/period_type_emun.dart';
+import 'package:z_charts/package/enums/time_unit_enum.dart';
 import 'package:z_charts/package/models/z_data_model.dart';
 
 class ZParams extends ZDataModel {
@@ -13,7 +14,7 @@ class ZParams extends ZDataModel {
     id: 1,
     periodType: PeriodTypeEnum.THIS_MONTH.name,
     pageId: '',
-    timeUnit: 'day',
+    timeUnit: TimeUnitEnum.DAY.name,
     chartType: 'line',
     fromDate: DateTime.now(),
     toDate: DateTime.now(),

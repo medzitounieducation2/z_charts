@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/dialogs/date_picker.dart';
 import 'package:z_charts/package/enums/period_type_emun.dart';
+import 'package:z_charts/package/enums/time_unit_enum.dart';
 import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/utils/period_dates_util.dart';
 
@@ -342,14 +343,14 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            params!.timeUnit = 'hour';
+                            params!.timeUnit = TimeUnitEnum.HOUR.name;
                             widget.settingOutput(params!);
                           });
                         },
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == 'hour'
+                          params!.timeUnit == TimeUnitEnum.HOUR.name
                               ? Colors.blueGrey[200]
                               : null,
                           minimumSize: Size(10, 10),
@@ -358,13 +359,13 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       ),
                       TextButton(
                         onPressed: () {
-                          params!.timeUnit = 'day';
+                          params!.timeUnit = TimeUnitEnum.DAY.name;
                           widget.settingOutput(params!);
                         },
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == 'day'
+                          params!.timeUnit == TimeUnitEnum.DAY.name
                               ? Colors.blueGrey[200]
                               : null,
                           minimumSize: Size(10, 10),
@@ -373,13 +374,13 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       ),
                       TextButton(
                         onPressed: () {
-                          params!.timeUnit = 'week';
+                          params!.timeUnit = TimeUnitEnum.WEEK.name;
                           widget.settingOutput(params!);
                         },
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == 'week'
+                          params!.timeUnit == TimeUnitEnum.WEEK.name
                               ? Colors.blueGrey[200]
                               : null,
                           minimumSize: Size(10, 10),
@@ -392,12 +393,12 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          params!.timeUnit = 'month';
+                          params!.timeUnit = TimeUnitEnum.MONTH.name;
                           widget.settingOutput(params!);
                         },
                         style: TextButton.styleFrom(
                           backgroundColor:
-                          params!.timeUnit == 'month'
+                          params!.timeUnit == TimeUnitEnum.MONTH.name
                               ? Colors.blueGrey[200]
                               : null,
                           minimumSize: Size(10, 10),
@@ -406,12 +407,12 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       ),
                       TextButton(
                         onPressed: () {
-                          params!.timeUnit = 'year';
+                          params!.timeUnit = TimeUnitEnum.YEAR.name;
                           widget.settingOutput(params!);
                         },
                         style: TextButton.styleFrom(
                           backgroundColor:
-                          params!.timeUnit == 'year'
+                          params!.timeUnit == TimeUnitEnum.YEAR.name
                               ? Colors.blueGrey[200]
                               : null,
                           minimumSize: Size(10, 10),
