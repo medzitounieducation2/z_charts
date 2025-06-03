@@ -12,7 +12,7 @@ class ZParams extends ZDataModel {
   String timeUnit;
 
   static ZParams empty() => ZParams(
-    id: 1,
+    id: null,
     periodType: PeriodTypeEnum.THIS_MONTH.name,
     pageId: '',
     timeUnit: TimeUnitEnum.DAY.name,
