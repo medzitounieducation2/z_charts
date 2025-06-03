@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/package/charts/z_bar_chart.dart';
 import 'package:z_charts/package/charts/z_line_chart.dart';
+import 'package:z_charts/package/enums/chart_type_enum.dart';
 import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/models/z_data_config.dart';
 import 'package:z_charts/package/models/z_params.dart';
@@ -71,7 +72,7 @@ class ZChartState extends State<ZChart> {
     ZDataUtils dataUtils = ZDataUtils();
     var data = dataUtils.build(dataList!, widget.chartParams);
     ZDataConfig chartConfig = buildChartConfig(data);
-    return widget.chartParams.chartType == 'line'
+    return widget.chartParams.chartType == ChartTypeEnum.LINE.name
         ? ZLineChart(data: data, chartConfig: chartConfig, unit: widget.unit,)
         : ZBarChart(data: data, chartConfig: chartConfig, unit: widget.unit);
   }

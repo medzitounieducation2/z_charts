@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/dialogs/date_picker.dart';
+import 'package:z_charts/package/enums/chart_type_enum.dart';
 import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/enums/time_unit_enum.dart';
 import 'package:z_charts/package/models/z_params.dart';
@@ -298,14 +299,14 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       IconButton(
                         style: IconButton.styleFrom(
                           backgroundColor:
-                          params!.chartType == 'bar'
+                          params!.chartType == ChartTypeEnum.BAR.name
                               ? Colors.blueGrey[200]
                               : null,
                         ),
                         icon: Icon(Icons.bar_chart),
                         onPressed: () {
                           setState(() {
-                            params!.chartType = 'bar';
+                            params!.chartType = ChartTypeEnum.BAR.name;
                             widget.settingOutput(params!);
                           });
                         },
@@ -313,14 +314,14 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       IconButton(
                         style: IconButton.styleFrom(
                           backgroundColor:
-                          params!.chartType == 'line'
+                          params!.chartType == ChartTypeEnum.LINE.name
                               ? Colors.blueGrey[200]
                               : null,
                         ),
                         icon: Icon(Icons.stacked_line_chart),
                         onPressed: () {
                           setState(() {
-                            params!.chartType = 'line';
+                            params!.chartType = ChartTypeEnum.LINE.name;
                             widget.settingOutput(params!);
                           });
                         },
