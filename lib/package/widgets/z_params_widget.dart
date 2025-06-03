@@ -11,11 +11,13 @@ import 'package:z_charts/package/utils/period_dates_util.dart';
 class ZParamsWidget extends StatefulWidget {
   final ZParams chartParams;
   final Function(ZParams) settingOutput;
+  final Function(bool) closeOutput;
 
   const ZParamsWidget({
     super.key,
     required this.chartParams,
     required this.settingOutput,
+    required this.closeOutput,
   });
 
   @override
@@ -31,9 +33,11 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
     params = ZParams.clone(widget.chartParams);
   }
 
-  saveParams() async {
+  saveParams() {
     var service = ZParamsServiceFactory.paramsService(context);
-    await service.updateEntity(params!.id, params!);
+    service.updateEntity(params!.id, params!).then((saved) {
+      widget.closeOutput(false);
+    });
   }
 
   @override
@@ -80,19 +84,19 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       TextButton(
                         onPressed:
                             () => datePicker(
-                          context,
+                              context,
                               (dateTime) {
-                            setState(() {
-                              params!.fromDate = dateTime;
-                              params!.periodType =
-                                  PeriodTypeEnum.CUSTOM.name;
-                              widget.settingOutput(params!);
-                            });
-                          },
-                          params!.fromDate,
-                          null,
-                          params!.toDate,
-                        ),
+                                setState(() {
+                                  params!.fromDate = dateTime;
+                                  params!.periodType =
+                                      PeriodTypeEnum.CUSTOM.name;
+                                  widget.settingOutput(params!);
+                                });
+                              },
+                              params!.fromDate,
+                              null,
+                              params!.toDate,
+                            ),
                         style: TextButton.styleFrom(
                           minimumSize: const Size(40, 30),
                           // Width x Height
@@ -102,8 +106,8 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                           ),
                           // Adjust padding for better control
                           tapTargetSize:
-                          MaterialTapTargetSize
-                              .shrinkWrap, // Reduces touch target size
+                              MaterialTapTargetSize
+                                  .shrinkWrap, // Reduces touch target size
                         ),
                         child: Text(
                           DateFormat('yyyy-MM-dd').format(params!.fromDate),
@@ -114,19 +118,19 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       TextButton(
                         onPressed:
                             () => datePicker(
-                          context,
+                              context,
                               (dateTime) {
-                            setState(() {
-                              params!.toDate = dateTime;
-                              params!.periodType =
-                                  PeriodTypeEnum.CUSTOM.name;
-                              widget.settingOutput(params!);
-                            });
-                          },
-                          params!.toDate,
-                          params!.fromDate,
-                          null,
-                        ),
+                                setState(() {
+                                  params!.toDate = dateTime;
+                                  params!.periodType =
+                                      PeriodTypeEnum.CUSTOM.name;
+                                  widget.settingOutput(params!);
+                                });
+                              },
+                              params!.toDate,
+                              params!.fromDate,
+                              null,
+                            ),
                         style: TextButton.styleFrom(
                           minimumSize: const Size(40, 30),
                           // Width x Height
@@ -136,8 +140,8 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                           ),
                           // Adjust padding for better control
                           tapTargetSize:
-                          MaterialTapTargetSize
-                              .shrinkWrap, // Reduces touch target size
+                              MaterialTapTargetSize
+                                  .shrinkWrap, // Reduces touch target size
                         ),
                         child: Text(
                           DateFormat('yyyy-MM-dd').format(params!.toDate),
@@ -166,13 +170,13 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         style: TextButton.styleFrom(
                           minimumSize: Size(10, 10),
                           tapTargetSize:
-                          MaterialTapTargetSize
-                              .shrinkWrap, // Shrink hit area
+                              MaterialTapTargetSize
+                                  .shrinkWrap, // Shrink hit area
                           backgroundColor:
-                          params!.periodType ==
-                              PeriodTypeEnum.THIS_YEAR.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.periodType ==
+                                      PeriodTypeEnum.THIS_YEAR.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                         ),
                         child: Text(
                           'This year',
@@ -196,13 +200,13 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         style: TextButton.styleFrom(
                           minimumSize: Size(10, 10),
                           tapTargetSize:
-                          MaterialTapTargetSize
-                              .shrinkWrap, // Shrink hit area
+                              MaterialTapTargetSize
+                                  .shrinkWrap, // Shrink hit area
                           backgroundColor:
-                          params!.periodType ==
-                              PeriodTypeEnum.THIS_MONTH.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.periodType ==
+                                      PeriodTypeEnum.THIS_MONTH.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                         ),
                         child: Text(
                           'This month',
@@ -234,10 +238,10 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                           // visualDensity: VisualDensity.compact, // Compact layout
                           minimumSize: Size(10, 10),
                           backgroundColor:
-                          params!.periodType ==
-                              PeriodTypeEnum.THIS_WEEK.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.periodType ==
+                                      PeriodTypeEnum.THIS_WEEK.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                         ),
                         child: Text(
                           'This week',
@@ -263,9 +267,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       IconButton(
                         style: IconButton.styleFrom(
                           backgroundColor:
-                          params!.chartType == ChartTypeEnum.BAR.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.chartType == ChartTypeEnum.BAR.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                         ),
                         icon: Icon(Icons.bar_chart),
                         onPressed: () {
@@ -278,9 +282,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                       IconButton(
                         style: IconButton.styleFrom(
                           backgroundColor:
-                          params!.chartType == ChartTypeEnum.LINE.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.chartType == ChartTypeEnum.LINE.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                         ),
                         icon: Icon(Icons.stacked_line_chart),
                         onPressed: () {
@@ -315,9 +319,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == TimeUnitEnum.HOUR.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.timeUnit == TimeUnitEnum.HOUR.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                           minimumSize: Size(10, 10),
                         ),
                         child: Text('Hour', style: TextStyle(fontSize: 12)),
@@ -330,9 +334,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == TimeUnitEnum.DAY.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.timeUnit == TimeUnitEnum.DAY.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                           minimumSize: Size(10, 10),
                         ),
                         child: Text('Day', style: TextStyle(fontSize: 12)),
@@ -345,9 +349,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         style: TextButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           backgroundColor:
-                          params!.timeUnit == TimeUnitEnum.WEEK.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.timeUnit == TimeUnitEnum.WEEK.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                           minimumSize: Size(10, 10),
                         ),
                         child: Text('Week', style: TextStyle(fontSize: 12)),
@@ -363,9 +367,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         },
                         style: TextButton.styleFrom(
                           backgroundColor:
-                          params!.timeUnit == TimeUnitEnum.MONTH.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.timeUnit == TimeUnitEnum.MONTH.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                           minimumSize: Size(10, 10),
                         ),
                         child: Text('Month', style: TextStyle(fontSize: 12)),
@@ -377,9 +381,9 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                         },
                         style: TextButton.styleFrom(
                           backgroundColor:
-                          params!.timeUnit == TimeUnitEnum.YEAR.name
-                              ? Colors.blueGrey[200]
-                              : null,
+                              params!.timeUnit == TimeUnitEnum.YEAR.name
+                                  ? Colors.blueGrey[200]
+                                  : null,
                           minimumSize: Size(10, 10),
                         ),
                         child: Text('Year', style: TextStyle(fontSize: 12)),
@@ -387,6 +391,27 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                     ],
                   ),
                 ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 3.0,
+          right: 40.0,
+          child: SizedBox(
+            width: 32, // Smaller width
+            height: 32, // Smaller height
+            child: IconButton(
+              onPressed: () {
+                widget.closeOutput(false);
+              },
+              icon: Icon(
+                Icons.cancel,
+                size: 18, // Smaller icon size
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: Colors.red[200],
+                padding: EdgeInsets.zero, // Remove extra padding
               ),
             ),
           ),

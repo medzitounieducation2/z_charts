@@ -111,6 +111,11 @@ class _ZFullChartViewState extends State<ZFullChartView> {
                 elevation: 6,
                 color: Colors.white,
                 child: ZParamsWidget(
+                  closeOutput: (isClosed) {
+                    setState(() {
+                      _showParams = false;
+                    });
+                  },
                   chartParams: _zParams!,
                   settingOutput: (data) {
                     setState(() {

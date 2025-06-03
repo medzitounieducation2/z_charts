@@ -36,14 +36,12 @@ class SampleChartParamsService extends ZParamsService {
 
   @override
   Future<ZParams?> getEntityById(dynamic id) async {
-    final intId = int.tryParse(id);
-    return data.firstWhere((item) => item.id == intId);
+    return data.firstWhere((item) => item.id == id);
   }
 
   @override
   Future<void> updateEntity(dynamic id, ZParams newValue) async {
-    final intId = int.tryParse(id);
-    final index = data.indexWhere((item) => item.id == intId);
+    final index = data.indexWhere((item) => item.id == id);
     if (index != -1) {
       data[index] = newValue;
     }
