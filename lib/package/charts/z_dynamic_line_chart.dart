@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/models/z_chart_data_config.dart';
 
-class ZDynamicLineChart extends StatefulWidget {
+class ZLineChart extends StatefulWidget {
   final List<Map<String, dynamic>> data;
-  final ZChartDataConfig chartConfig;
+  final ZDataConfig chartConfig;
   final String unit;
 
-  const ZDynamicLineChart({
+  const ZLineChart({
     super.key,
     required this.data,
     required this.chartConfig,
@@ -16,10 +16,10 @@ class ZDynamicLineChart extends StatefulWidget {
   });
 
   @override
-  State<ZDynamicLineChart> createState() => _ZDynamicLineChartState();
+  State<ZLineChart> createState() => _ZLineChartState();
 }
 
-class _ZDynamicLineChartState extends State<ZDynamicLineChart> {
+class _ZLineChartState extends State<ZLineChart> {
   final List<Color> gradientColors = [Colors.cyanAccent, Colors.blueAccent];
 
   @override

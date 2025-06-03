@@ -16,7 +16,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   List<Product> items = [];
   ProductService productService = ProductService();
-  var miniChartKey = GlobalKey<ZMiniDynamicChartViewState>();
+  var miniChartKey = GlobalKey<ZMiniChartViewState>();
   int count = 50;
   int mltp = 1;
 
@@ -174,7 +174,7 @@ class _ProductPageState extends State<ProductPage> {
               ],
             ),
 
-            ZMiniDynamicChartView(
+            ZMiniChartView(
               key: miniChartKey,
               pageId: 'walking',
               unit: 'step',

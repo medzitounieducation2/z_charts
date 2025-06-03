@@ -1,6 +1,6 @@
 import 'package:z_charts/package/models/z_data_model.dart';
 
-class ZChartParams extends ZDataModel {
+class ZParams extends ZDataModel {
   dynamic pageId;
   DateTime fromDate;
   DateTime toDate;
@@ -8,7 +8,7 @@ class ZChartParams extends ZDataModel {
   String chartType;
   String timeUnit;
 
-  static ZChartParams empty() => ZChartParams(
+  static ZParams empty() => ZParams(
     id: 1,
     periodType: 'this_month',
     pageId: '',
@@ -18,7 +18,7 @@ class ZChartParams extends ZDataModel {
     toDate: DateTime.now(),
   );
 
-  ZChartParams({
+  ZParams({
     required super.id,
     required this.pageId,
     required this.fromDate,
@@ -29,8 +29,8 @@ class ZChartParams extends ZDataModel {
   });
 
   @override
-  ZChartParams fromJson(Map<String, dynamic> json, dynamic id) {
-    return ZChartParams(
+  ZParams fromJson(Map<String, dynamic> json, dynamic id) {
+    return ZParams(
       id: id,
       pageId: json['pageId'],
       fromDate: json['fromDate'],
@@ -53,8 +53,8 @@ class ZChartParams extends ZDataModel {
     };
   }
 
-  static ZChartParams clone(ZChartParams entity) {
-    return ZChartParams(
+  static ZParams clone(ZParams entity) {
+    return ZParams(
       id: entity.id,
       pageId: entity.pageId,
       fromDate: entity.fromDate,

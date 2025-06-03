@@ -6,13 +6,13 @@ import 'package:z_charts/package/models/z_chart_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
 import 'package:z_charts/package/widgets/z_chart_setting_widget.dart';
 
-class ZFullDynamicChartView extends StatefulWidget {
+class ZFullChartView extends StatefulWidget {
   final String pageId;
   final String unit;
   final String label;
   final ZDataService dataService;
 
-  const ZFullDynamicChartView({
+  const ZFullChartView({
     super.key,
     required this.pageId,
     required this.unit,
@@ -21,11 +21,11 @@ class ZFullDynamicChartView extends StatefulWidget {
   });
 
   @override
-  State<ZFullDynamicChartView> createState() => _ZFullDynamicChartViewState();
+  State<ZFullChartView> createState() => _ZFullChartViewState();
 }
 
-class _ZFullDynamicChartViewState extends State<ZFullDynamicChartView> {
-  ZChartParams? chartParams;
+class _ZFullChartViewState extends State<ZFullChartView> {
+  ZParams? chartParams;
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _ZFullDynamicChartViewState extends State<ZFullDynamicChartView> {
     var service = ZParamsServiceFactory.paramsService(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
-        var params = ZChartParams.empty();
+        var params = ZParams.empty();
         params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {
@@ -80,7 +80,7 @@ class _ZFullDynamicChartViewState extends State<ZFullDynamicChartView> {
           children: [
             chartParams == null
                 ? Container()
-                : ZChartParamsWidget(
+                : ZParamsWidget(
                   chartParams: chartParams!,
                   settingOutput: (data) {
                     setState(() {
@@ -95,7 +95,7 @@ class _ZFullDynamicChartViewState extends State<ZFullDynamicChartView> {
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(1.0),
-                      child: ZDynamicChart(
+                      child: ZChart(
                         chartParams: chartParams!,
                         dataService: widget.dataService,
                         unit: widget.unit,

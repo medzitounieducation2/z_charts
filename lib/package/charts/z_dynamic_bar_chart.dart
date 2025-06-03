@@ -3,12 +3,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/models/z_chart_data_config.dart';
 
-class ZDynamicBarChart extends StatefulWidget {
+class ZBarChart extends StatefulWidget {
   final List<Map<String, dynamic>> data;
-  final ZChartDataConfig chartConfig;
+  final ZDataConfig chartConfig;
   final String unit;
 
-  const ZDynamicBarChart({
+  const ZBarChart({
     super.key,
     required this.data,
     required this.chartConfig,
@@ -16,10 +16,10 @@ class ZDynamicBarChart extends StatefulWidget {
   });
 
   @override
-  State<ZDynamicBarChart> createState() => _ZDynamicBarChartState();
+  State<ZBarChart> createState() => _ZBarChartState();
 }
 
-class _ZDynamicBarChartState extends State<ZDynamicBarChart> {
+class _ZBarChartState extends State<ZBarChart> {
 
   @override
   Widget build(BuildContext context) {

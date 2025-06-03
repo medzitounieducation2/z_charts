@@ -1,9 +1,9 @@
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/models/z_chart_params.dart';
 
-class ZChartDataUtils {
+class ZDataUtils {
   List<Map<String, dynamic>> build(
-      List<Map<String, dynamic>> filteredData, ZChartParams setting) {
+      List<Map<String, dynamic>> filteredData, ZParams setting) {
     // Apply time unit
     Map<String, Map<String, dynamic>> groupedData = {};
 

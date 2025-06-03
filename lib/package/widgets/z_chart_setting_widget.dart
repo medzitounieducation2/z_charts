@@ -3,27 +3,27 @@ import 'package:intl/intl.dart';
 import 'package:z_charts/package/dialogs/date_picker.dart';
 import 'package:z_charts/package/models/z_chart_params.dart';
 
-class ZChartParamsWidget extends StatefulWidget {
-  final ZChartParams chartParams;
-  final Function(ZChartParams) settingOutput;
+class ZParamsWidget extends StatefulWidget {
+  final ZParams chartParams;
+  final Function(ZParams) settingOutput;
 
-  const ZChartParamsWidget({
+  const ZParamsWidget({
     super.key,
     required this.chartParams,
     required this.settingOutput,
   });
 
   @override
-  State<ZChartParamsWidget> createState() => _ZChartParamsWidgetState();
+  State<ZParamsWidget> createState() => _ZParamsWidgetState();
 }
 
-class _ZChartParamsWidgetState extends State<ZChartParamsWidget> {
-  ZChartParams? params;
+class _ZParamsWidgetState extends State<ZParamsWidget> {
+  ZParams? params;
 
   @override
   void initState() {
     super.initState();
-    params = ZChartParams.clone(widget.chartParams);
+    params = ZParams.clone(widget.chartParams);
   }
 
   /*void _updateStateFromSettings(List<ChartSetting> settings) {

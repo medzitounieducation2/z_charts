@@ -6,17 +6,17 @@ import 'package:z_charts/package/models/z_chart_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
 import 'package:z_charts/package/utils/z_chart_data_utils.dart';
 
-class ZDynamicChart extends StatefulWidget {
-  final ZChartParams chartParams;
+class ZChart extends StatefulWidget {
+  final ZParams chartParams;
   final ZDataService dataService;
   final String unit;
-  const ZDynamicChart({super.key, required this.chartParams, required this.dataService, required this.unit});
+  const ZChart({super.key, required this.chartParams, required this.dataService, required this.unit});
 
   @override
-  State<ZDynamicChart> createState() => ZDynamicChartState();
+  State<ZChart> createState() => ZChartState();
 }
 
-class ZDynamicChartState extends State<ZDynamicChart> {
+class ZChartState extends State<ZChart> {
   List<Map<String, dynamic>>? dataList;
 
   @override
@@ -60,7 +60,7 @@ class ZDynamicChartState extends State<ZDynamicChart> {
     });
   }
 
-  ZChartDataConfig buildChartConfig(List<Map<String, dynamic>> data) {
+  ZDataConfig buildChartConfig(List<Map<String, dynamic>> data) {
     List<double> values = data.map((item) => item['value'] as double).toList();
     // Find min and max
     double minValue = values.reduce((a, b) => a < b ? a : b);
@@ -68,7 +68,7 @@ class ZDynamicChartState extends State<ZDynamicChart> {
     double minX = 0;
     double maxX = data.length.toDouble() - 1;
     double horizontalInterval = maxValue > 100 ? 10 : 1;
-    return ZChartDataConfig(
+    return ZDataConfig(
         minValue: minValue,
         maxValue: maxValue,
         minX: minX,
@@ -81,11 +81,11 @@ class ZDynamicChartState extends State<ZDynamicChart> {
     if(dataList == null || dataList!.isEmpty) {
       return Center(child: Text('No chart data!'));
     }
-    ZChartDataUtils dataUtils = ZChartDataUtils();
+    ZDataUtils dataUtils = ZDataUtils();
     var data = dataUtils.build(dataList!, widget.chartParams);
-    ZChartDataConfig chartConfig = buildChartConfig(data);
+    ZDataConfig chartConfig = buildChartConfig(data);
     return widget.chartParams.chartType == 'line'
-        ? ZDynamicLineChart(data: data, chartConfig: chartConfig, unit: widget.unit,)
-        : ZDynamicBarChart(data: data, chartConfig: chartConfig, unit: widget.unit);
+        ? ZLineChart(data: data, chartConfig: chartConfig, unit: widget.unit,)
+        : ZBarChart(data: data, chartConfig: chartConfig, unit: widget.unit);
   }
 }

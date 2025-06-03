@@ -5,13 +5,13 @@ import 'package:z_charts/package/models/z_chart_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
 import 'package:z_charts/package/views/z_full_dynamic_chart_view.dart';
 
-class ZMiniDynamicChartView extends StatefulWidget {
+class ZMiniChartView extends StatefulWidget {
   final dynamic pageId;
   final String unit;
   final String label;
   final ZDataService dataService;
 
-  const ZMiniDynamicChartView({
+  const ZMiniChartView({
     super.key,
     required this.pageId,
     required this.unit,
@@ -20,13 +20,13 @@ class ZMiniDynamicChartView extends StatefulWidget {
   });
 
   @override
-  State<ZMiniDynamicChartView> createState() => ZMiniDynamicChartViewState();
+  State<ZMiniChartView> createState() => ZMiniChartViewState();
 }
 
-class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
-  ZDynamicChart? dynamicChart;
-  ZChartParams? chartParams;
-  var dynamicChartKey = GlobalKey<ZDynamicChartState>();
+class ZMiniChartViewState extends State<ZMiniChartView> {
+  ZChart? chart;
+  ZParams? chartParams;
+  var chartKey = GlobalKey<ZChartState>();
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
     var service = ZParamsServiceFactory.paramsService(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
-        var params = ZChartParams.empty();
+        var params = ZParams.empty();
         params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {
@@ -54,7 +54,7 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
   }
 
   refreshChart() {
-    dynamicChartKey.currentState?.refreshChart();
+    chartKey.currentState?.refreshChart();
   }
 
   _navigateToFullDynamicChartPage() async {
@@ -62,7 +62,7 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
       context,
       MaterialPageRoute(
         builder:
-            (context) => ZFullDynamicChartView(
+            (context) => ZFullChartView(
               pageId: widget.pageId,
               dataService: widget.dataService,
               label: widget.label,
@@ -93,8 +93,8 @@ class ZMiniDynamicChartViewState extends State<ZMiniDynamicChartView> {
                       height: 250,
                       color: Colors.grey[200],
                       alignment: Alignment.center,
-                      child: ZDynamicChart(
-                        key: dynamicChartKey,
+                      child: ZChart(
+                        key: chartKey,
                         chartParams: chartParams!,
                         dataService: widget.dataService,
                         unit: widget.unit,
