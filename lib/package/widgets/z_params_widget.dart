@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:z_charts/package/dialogs/date_picker.dart';
+import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/models/z_params.dart';
+import 'package:z_charts/package/utils/period_dates_util.dart';
 
 class ZParamsWidget extends StatefulWidget {
   final ZParams chartParams;
@@ -123,7 +125,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                         (dateTime) {
                                           setState(() {
                                             params!.fromDate = dateTime;
-                                            params!.periodType = 'custom';
+                                            params!.periodType = PeriodTypeEnum.CUSTOM.name;
                                             widget.settingOutput(params!);
                                           });
                                         },
@@ -158,7 +160,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                         (dateTime) {
                                           setState(() {
                                             params!.toDate = dateTime;
-                                            params!.periodType = 'custom';
+                                            params!.periodType = PeriodTypeEnum.CUSTOM.name;
                                             widget.settingOutput(params!);
                                           });
                                         },
@@ -193,19 +195,12 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                 TextButton(
                                   onPressed: () {
                                     setState(() {
-                                      params!.periodType = 'this_year';
-
-                                      final now = DateTime.now();
-                                      params!.fromDate = DateTime(
-                                        now.year,
-                                        1,
-                                        1,
-                                      );
-                                      params!.toDate = DateTime(
-                                        now.year,
-                                        12,
-                                        31,
-                                      );
+                                      params!.periodType = PeriodTypeEnum.THIS_YEAR.name;
+                                      var periodDates = getPeriodDatesUtil(widget.chartParams.periodType);
+                                      if(periodDates != null) {
+                                        params!.fromDate = periodDates['fromDate']!;
+                                        params!.toDate = periodDates['toDate']!;
+                                      }
                                       widget.settingOutput(params!);
                                     });
                                   },
@@ -215,7 +210,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                         MaterialTapTargetSize
                                             .shrinkWrap, // Shrink hit area
                                     backgroundColor:
-                                        params!.periodType == 'this_year'
+                                        params!.periodType == PeriodTypeEnum.THIS_YEAR.name
                                             ? Colors.blueGrey[200]
                                             : null,
                                   ),
@@ -227,19 +222,12 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                 TextButton(
                                   onPressed: () {
                                     setState(() {
-                                      params!.periodType = 'this_month';
-
-                                      final now = DateTime.now();
-                                      params!.fromDate = DateTime(
-                                        now.year,
-                                        now.month,
-                                        1,
-                                      );
-                                      params!.toDate = DateTime(
-                                        now.year,
-                                        now.month + 1,
-                                        0,
-                                      );
+                                      params!.periodType = PeriodTypeEnum.THIS_MONTH.name;
+                                      var periodDates = getPeriodDatesUtil(widget.chartParams.periodType);
+                                      if(periodDates != null) {
+                                        params!.fromDate = periodDates['fromDate']!;
+                                        params!.toDate = periodDates['toDate']!;
+                                      }
                                       widget.settingOutput(params!);
                                     });
                                   },
@@ -249,7 +237,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                         MaterialTapTargetSize
                                             .shrinkWrap, // Shrink hit area
                                     backgroundColor:
-                                        params!.periodType == 'this_month'
+                                        params!.periodType == PeriodTypeEnum.THIS_MONTH.name
                                             ? Colors.blueGrey[200]
                                             : null,
                                   ),
@@ -265,18 +253,12 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                 TextButton(
                                   onPressed: () {
                                     setState(() {
-                                      params!.periodType = 'this_week';
-
-                                      final now = DateTime.now();
-
-                                      final int currentWeekday =
-                                          now.weekday; // Monday = 1, Sunday = 7
-                                      params!.fromDate = now.subtract(
-                                        Duration(days: currentWeekday - 1),
-                                      ); // Go back to Monday
-                                      params!.toDate = params!.fromDate.add(
-                                        const Duration(days: 6),
-                                      ); // Sunday of the same week
+                                      params!.periodType = PeriodTypeEnum.THIS_WEEK.name;
+                                      var periodDates = getPeriodDatesUtil(widget.chartParams.periodType);
+                                      if(periodDates != null) {
+                                        params!.fromDate = periodDates['fromDate']!;
+                                        params!.toDate = periodDates['toDate']!;
+                                      }
                                       widget.settingOutput(params!);
                                     });
                                   },
@@ -288,7 +270,7 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
                                     // visualDensity: VisualDensity.compact, // Compact layout
                                     minimumSize: Size(10, 10),
                                     backgroundColor:
-                                        params!.periodType == 'this_week'
+                                        params!.periodType == PeriodTypeEnum.THIS_WEEK.name
                                             ? Colors.blueGrey[200]
                                             : null,
                                   ),

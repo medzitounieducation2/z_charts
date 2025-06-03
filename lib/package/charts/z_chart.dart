@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/package/charts/z_bar_chart.dart';
 import 'package:z_charts/package/charts/z_line_chart.dart';
+import 'package:z_charts/package/enums/period_type_emun.dart';
 import 'package:z_charts/package/models/z_data_config.dart';
 import 'package:z_charts/package/models/z_params.dart';
 import 'package:z_charts/package/services/z_data_service.dart';
+import 'package:z_charts/package/utils/period_dates_util.dart';
 import 'package:z_charts/package/utils/z_data_utils.dart';
 
 class ZChart extends StatefulWidget {
@@ -32,25 +34,10 @@ class ZChartState extends State<ZChart> {
   void loadChartData() {
     var fromDate = widget.chartParams.fromDate;
     var toDate = widget.chartParams.toDate;
-    if(widget.chartParams.periodType == 'this_year'){
-      final now = DateTime.now();
-      fromDate = DateTime(now.year, 1, 1);
-      toDate = DateTime(now.year, 12 + 1, 31);
-    } else if(widget.chartParams.periodType == 'this_month'){
-      final now = DateTime.now();
-      fromDate = DateTime(now.year, now.month, 1);
-      toDate = DateTime(now.year, now.month + 1, 0);
-    } else if(widget.chartParams.periodType == 'this_week') {
-      final int currentWeekday = DateTime.now()
-          .weekday; // Monday = 1, Sunday = 7
-      fromDate = DateTime.now().subtract(
-          Duration(
-              days: currentWeekday -
-                  1)); // Go back to Monday
-      toDate = fromDate
-          .add(const Duration(
-          days:
-          6)); // Sunday of the same week
+    var periodDates = getPeriodDatesUtil(widget.chartParams.periodType);
+    if(periodDates != null) {
+      fromDate = periodDates['fromDate']!;
+      toDate = periodDates['toDate']!;
     }
     widget.dataService.fetchEntitiesBetween(fromDate, toDate).then((entities) {
       var data = widget.dataService.adaptData(entities);
