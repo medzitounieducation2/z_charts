@@ -27,6 +27,7 @@ class ZFullChartView extends StatefulWidget {
 
 class _ZFullChartViewState extends State<ZFullChartView> {
   ZParams? _zParams;
+  bool _showParams = false;
 
   @override
   void initState() {
@@ -74,14 +75,43 @@ class _ZFullChartViewState extends State<ZFullChartView> {
           onPressed: () => Navigator.pop(context), // Return to previous page
         ),
       ),
-      body: SingleChildScrollView(
-        // Allows scrolling if content overflows
-        scrollDirection: Axis.horizontal, // Expands width horizontally
-        child: Row(
-          children: [
-            _zParams == null
-                ? Container()
-                : ZParamsWidget(
+      body: Stack(
+        children: [
+          _zParams == null
+              ? Container()
+              : SizedBox(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: ZChart(
+                  chartParams: _zParams!,
+                  dataService: widget.dataService,
+                  unit: widget.unit,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: -7,
+            right: 10,
+            child: IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                setState(() {
+                  _showParams = !_showParams;
+                });
+              },
+            ),
+          ),
+          // Optional small settings overlay card
+          if (_showParams && _zParams != null)
+            Positioned(
+              top: 25,
+              right: 30,
+              child: Card(
+                elevation: 6,
+                color: Colors.white,
+                child: ZParamsWidget(
                   chartParams: _zParams!,
                   settingOutput: (data) {
                     setState(() {
@@ -89,24 +119,10 @@ class _ZFullChartViewState extends State<ZFullChartView> {
                     });
                   },
                 ),
-            _zParams == null
-                ? Container()
-                : SizedBox(
-                  width: 600,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: ZChart(
-                        chartParams: _zParams!,
-                        dataService: widget.dataService,
-                        unit: widget.unit,
-                      ),
-                    ),
-                  ),
-                ),
-          ],
-        ),
-      ),
+              ),
+            ),
+        ],
+      )
     );
   }
 }
