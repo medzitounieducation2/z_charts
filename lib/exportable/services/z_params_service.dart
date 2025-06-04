@@ -9,10 +9,6 @@ abstract class ZParamsService extends ZDataService<ZParams> {
     return [];
   }
   @override
-  Future<ZParams> addEntity(ZParams entity) {
-    return Future.value(ZParams.empty());
-  }
-  @override
   Future<List<ZParams>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) {
     return Future.value([]);
   }
