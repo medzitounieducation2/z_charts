@@ -27,6 +27,7 @@ class ZFullChartView extends StatefulWidget {
 class _ZFullChartViewState extends State<ZFullChartView> {
   ZParams? _zParams;
   bool _showParams = false;
+  var chartKey = GlobalKey<ZChartState>();
 
   @override
   void initState() {
@@ -83,6 +84,7 @@ class _ZFullChartViewState extends State<ZFullChartView> {
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: ZChart(
+                  key: chartKey,
                   chartParams: _zParams!,
                   dataService: widget.dataService,
                   unit: widget.unit,
@@ -121,6 +123,7 @@ class _ZFullChartViewState extends State<ZFullChartView> {
                     setState(() {
                       _zParams = data;
                     });
+                    chartKey.currentState?.refreshChart();
                   },
                 ),
               ),
