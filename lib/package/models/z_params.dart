@@ -22,7 +22,7 @@ class ZParams extends ZDataModel {
   );
 
   ZParams({
-    required super.id,
+    super.id,
     required this.pageId,
     required this.fromDate,
     required this.toDate,
