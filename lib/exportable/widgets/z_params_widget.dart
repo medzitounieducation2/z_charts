@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:z_charts/package/dialogs/date_picker.dart';
-import 'package:z_charts/package/enums/chart_type_enum.dart';
-import 'package:z_charts/package/enums/period_type_emun.dart';
-import 'package:z_charts/package/enums/time_unit_enum.dart';
-import 'package:z_charts/package/factories/z_params_service_factory.dart';
-import 'package:z_charts/package/models/z_params.dart';
-import 'package:z_charts/package/utils/period_dates_util.dart';
+import 'package:z_charts/exportable/dialogs/date_picker.dart';
+import 'package:z_charts/exportable/enums/chart_type_enum.dart';
+import 'package:z_charts/exportable/enums/period_type_emun.dart';
+import 'package:z_charts/exportable/enums/time_unit_enum.dart';
+import 'package:z_charts/exportable/factories/z_params_service_factory.dart';
+import 'package:z_charts/exportable/models/z_params.dart';
+import 'package:z_charts/exportable/utils/period_dates_util.dart';
 
 class ZParamsWidget extends StatefulWidget {
   final ZParams chartParams;

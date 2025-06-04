@@ -1,4 +1,4 @@
-import 'package:z_charts/package/models/z_data_model.dart';
+import 'package:z_charts/exportable/models/z_data_model.dart';
 
 class Product extends ZDataModel {
   String unit;

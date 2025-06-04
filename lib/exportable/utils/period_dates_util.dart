@@ -1,4 +1,4 @@
-import 'package:z_charts/package/enums/period_type_emun.dart';
+import 'package:z_charts/exportable/enums/period_type_emun.dart';
 
 Map<String, DateTime>? getPeriodDatesUtil(String periodTypeStr) {
   final now = DateTime.now();

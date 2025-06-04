@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:z_charts/package/charts/z_chart.dart';
-import 'package:z_charts/package/factories/z_params_service_factory.dart';
-import 'package:z_charts/package/models/z_params.dart';
-import 'package:z_charts/package/services/z_data_service.dart';
-import 'package:z_charts/package/widgets/z_params_widget.dart';
+import 'package:z_charts/exportable/charts/z_chart.dart';
+import 'package:z_charts/exportable/factories/z_params_service_factory.dart';
+import 'package:z_charts/exportable/models/z_params.dart';
+import 'package:z_charts/exportable/services/z_data_service.dart';
+import 'package:z_charts/exportable/widgets/z_params_widget.dart';
 
 class ZFullChartView extends StatefulWidget {
   final String pageId;

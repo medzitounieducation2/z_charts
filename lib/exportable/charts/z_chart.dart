@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:z_charts/package/charts/z_bar_chart.dart';
-import 'package:z_charts/package/charts/z_line_chart.dart';
-import 'package:z_charts/package/enums/chart_type_enum.dart';
-import 'package:z_charts/package/models/z_data_config.dart';
-import 'package:z_charts/package/models/z_params.dart';
-import 'package:z_charts/package/services/z_data_service.dart';
-import 'package:z_charts/package/utils/period_dates_util.dart';
-import 'package:z_charts/package/utils/z_data_utils.dart';
+import 'package:z_charts/exportable/charts/z_bar_chart.dart';
+import 'package:z_charts/exportable/charts/z_line_chart.dart';
+import 'package:z_charts/exportable/enums/chart_type_enum.dart';
+import 'package:z_charts/exportable/models/z_data_config.dart';
+import 'package:z_charts/exportable/models/z_params.dart';
+import 'package:z_charts/exportable/services/z_data_service.dart';
+import 'package:z_charts/exportable/utils/period_dates_util.dart';
+import 'package:z_charts/exportable/utils/z_data_utils.dart';
 
 class ZChart extends StatefulWidget {
   final ZParams chartParams;

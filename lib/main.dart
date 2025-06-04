@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:z_charts/examples/sample_app/pages/product/product_page.dart';
 import 'package:z_charts/examples/sample_app/services/sample_chart_params_service.dart';
-import 'package:z_charts/package/services/z_params_service.dart';
+import 'package:z_charts/exportable/services/z_params_service.dart';
 
 void main() {
   ZParamsService paramsService = SampleChartParamsService();

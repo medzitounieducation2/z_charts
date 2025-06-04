@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:z_charts/charts/zc3_lines_chart.dart';
 import 'package:z_charts/examples/sample_app/pages/product/product_page.dart';
 
 class AppMenu extends StatelessWidget {
@@ -31,20 +30,6 @@ class AppMenu extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            title: Row(
-              spacing: 10,
-              children: [Icon(Icons.stacked_line_chart), Text('3 lines')],
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Zc3LinesChart(),
                 ),
               );
             },

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:z_charts/package/charts/z_chart.dart';
-import 'package:z_charts/package/factories/z_params_service_factory.dart';
-import 'package:z_charts/package/models/z_params.dart';
-import 'package:z_charts/package/services/z_data_service.dart';
-import 'package:z_charts/package/views/z_full_chart_view.dart';
+import 'package:z_charts/exportable/charts/z_chart.dart';
+import 'package:z_charts/exportable/factories/z_params_service_factory.dart';
+import 'package:z_charts/exportable/models/z_params.dart';
+import 'package:z_charts/exportable/services/z_data_service.dart';
+import 'package:z_charts/exportable/views/z_full_chart_view.dart';
 
 class ZMiniChartView extends StatefulWidget {
   final dynamic pageId;
