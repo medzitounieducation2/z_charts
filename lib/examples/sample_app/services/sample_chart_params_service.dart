@@ -18,25 +18,10 @@ class SampleChartParamsService extends ZParamsService {
   }
 
   @override
-  Future<void> deleteEntity(ZParams entity) async {
-    data.removeWhere((item) => item.id == entity.id);
-  }
-
-  @override
   Future<List<ZParams>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) async {
     return data.where((item) =>
     item.fromDate.isAfter(startDate) && item.fromDate.isBefore(endDate)
     ).toList();
-  }
-
-  @override
-  Future<List<ZParams>> getEntities() async {
-    return List.from(data);
-  }
-
-  @override
-  Future<ZParams?> getEntityById(dynamic id) async {
-    return data.firstWhere((item) => item.id == id);
   }
 
   @override

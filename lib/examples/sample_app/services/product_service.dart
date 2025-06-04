@@ -32,7 +32,6 @@ class ProductService extends ZDataService<Product> {
     return entity;
   }
 
-  @override
   Future<void> deleteEntity(Product entity) async {
     data.removeWhere((item) => item.id == entity.id);
   }
@@ -44,12 +43,10 @@ class ProductService extends ZDataService<Product> {
     ).toList();
   }
 
-  @override
   Future<List<Product>> getEntities() async {
     return List.from(data);
   }
 
-  @override
   Future<Product?> getEntityById(dynamic id) async {
     final intId = int.tryParse(id);
     return data.firstWhere((item) => item.id == intId);
