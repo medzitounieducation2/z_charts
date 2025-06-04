@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:z_charts/exportable/enums/time_unit_enum.dart';
+import 'package:z_charts/exportable/enums/z_time_unit_enum.dart';
 import 'package:z_charts/exportable/models/z_params.dart';
 
 class ZDataUtils {

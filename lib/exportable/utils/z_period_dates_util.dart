@@ -1,6 +1,6 @@
-import 'package:z_charts/exportable/enums/period_type_emun.dart';
+import 'package:z_charts/exportable/enums/z_period_type_emun.dart';
 
-Map<String, DateTime>? getPeriodDatesUtil(String periodTypeStr) {
+Map<String, DateTime>? zGetPeriodDatesUtil(String periodTypeStr) {
   final now = DateTime.now();
   PeriodTypeEnum periodType =
       PeriodTypeEnum.values.where((item) => item.name == periodTypeStr).first;

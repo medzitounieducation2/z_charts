@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:z_charts/exportable/charts/z_bar_chart.dart';
 import 'package:z_charts/exportable/charts/z_line_chart.dart';
-import 'package:z_charts/exportable/enums/chart_type_enum.dart';
+import 'package:z_charts/exportable/enums/z_chart_type_enum.dart';
 import 'package:z_charts/exportable/models/z_data_config.dart';
 import 'package:z_charts/exportable/models/z_params.dart';
 import 'package:z_charts/exportable/services/z_data_service.dart';
-import 'package:z_charts/exportable/utils/period_dates_util.dart';
+import 'package:z_charts/exportable/utils/z_period_dates_util.dart';
 import 'package:z_charts/exportable/utils/z_data_utils.dart';
 
 class ZChart extends StatefulWidget {
@@ -34,7 +34,7 @@ class ZChartState extends State<ZChart> {
   void loadChartData() {
     var fromDate = widget.chartParams.fromDate;
     var toDate = widget.chartParams.toDate;
-    var periodDates = getPeriodDatesUtil(widget.chartParams.periodType);
+    var periodDates = zGetPeriodDatesUtil(widget.chartParams.periodType);
     if(periodDates != null) {
       fromDate = periodDates['fromDate']!;
       toDate = periodDates['toDate']!;

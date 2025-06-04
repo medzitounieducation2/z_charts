@@ -1,6 +1,6 @@
-import 'package:z_charts/exportable/enums/chart_type_enum.dart';
-import 'package:z_charts/exportable/enums/period_type_emun.dart';
-import 'package:z_charts/exportable/enums/time_unit_enum.dart';
+import 'package:z_charts/exportable/enums/z_chart_type_enum.dart';
+import 'package:z_charts/exportable/enums/z_period_type_emun.dart';
+import 'package:z_charts/exportable/enums/z_time_unit_enum.dart';
 import 'package:z_charts/exportable/models/z_data_model.dart';
 
 class ZParams extends ZDataModel {

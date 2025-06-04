@@ -1,3 +1,3 @@
 library z_charts;
 
-// export 'package';
+export 'exportable/index.dart';
