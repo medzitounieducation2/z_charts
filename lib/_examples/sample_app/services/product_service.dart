@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:z_charts/examples/sample_app/models/product.dart';
+import 'package:z_charts/_examples/sample_app/models/product.dart';
 import 'package:z_charts/exportable/services/z_data_service.dart';
 
 class ProductService extends ZDataService<Product> {

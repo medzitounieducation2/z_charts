@@ -1,15 +1,15 @@
 import 'package:z_charts/exportable/models/z_params.dart';
 import 'package:z_charts/exportable/services/z_data_service.dart';
 
-abstract class ZParamsService extends ZDataService<ZParams> {
-  Future<ZParams?> getByPageId(dynamic pageId);
+abstract class ZParamsService<T extends ZParams> extends ZDataService<T> {
+  Future<T?> getByPageId(dynamic pageId);
 
   @override
-  List<Map<String, dynamic>> adaptData(List<ZParams> data) {
+  List<Map<String, dynamic>> adaptData(List<T> data) {
     return [];
   }
   @override
-  Future<List<ZParams>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) {
+  Future<List<T>> fetchEntitiesBetween(DateTime startDate, DateTime endDate) {
     return Future.value([]);
   }
 }

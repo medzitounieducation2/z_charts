@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:z_charts/examples/sample_app/pages/product/product_page.dart';
+import 'package:z_charts/_examples/sample_app/pages/product/product_page.dart';
 
 class AppMenu extends StatelessWidget {
   const AppMenu({super.key});
