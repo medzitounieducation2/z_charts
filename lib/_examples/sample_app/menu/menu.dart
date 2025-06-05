@@ -37,7 +37,7 @@ class AppMenu extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Version: 1.3.1',
+              'Version: 1.3.5',
               style: TextStyle(color: Colors.grey),
             ),
           ),

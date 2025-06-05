@@ -1,18 +1,25 @@
-import 'package:z_charts/exportable/models/z_data_model.dart';
+import 'package:z_charts/exportable/models/z_data.dart';
 
-class Product extends ZDataModel {
+class Product implements ZData {
+  int? key;
   String unit;
   num value;
   DateTime timestamp;
 
+  @override
+  get id => key;
+
+  @override
+  set id(value) => key = value;
+
   static Product empty() =>
-      Product(id: null, unit: 'step', value: 0, timestamp: DateTime.now());
+      Product(key: null, unit: 'step', value: 0, timestamp: DateTime.now());
 
   Product({
     required this.unit,
     required this.value,
     required this.timestamp,
-    required super.id,
+    required this.key,
   });
 
   bool isFormValueValid() {
@@ -28,7 +35,7 @@ class Product extends ZDataModel {
 
   static Product clone(Product entity) {
     return Product(
-      id: entity.id,
+      key: entity.key,
       unit: entity.unit,
       value: entity.value,
       timestamp: entity.timestamp,

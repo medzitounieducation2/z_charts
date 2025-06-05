@@ -231,7 +231,7 @@ class _ProductPageState extends State<ProductPage> {
             unit: 'step',
             value: value,
             timestamp: date,
-            id: null,
+            key: null,
           );
           productService.addEntity(product).then((res) {
             loadData();

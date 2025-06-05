@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:z_charts/_examples/sample_app/pages/product/product_page.dart';
+import 'package:z_charts/_examples/sample_app/services/sample_chart_params_builder.dart';
 import 'package:z_charts/_examples/sample_app/services/sample_chart_params_service.dart';
+import 'package:z_charts/exportable/services/z_params_builder.dart';
 import 'package:z_charts/exportable/services/z_params_service.dart';
 
 void main() {
-  ZParamsService paramsService = SampleChartParamsService();
-  runApp(Provider<ZParamsService>.value(
-    value: paramsService, // singleton instance
-    child: const MyApp(),
-  ),);
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<ZParamsService>.value(value: SampleChartParamsService()),
+        Provider<ZParamsBuilder>.value(value: SampleChartParamsBuilder()),
+      ],
+      child: MyApp(),
+    ),
+   );
 }
 
 class MyApp extends StatelessWidget {

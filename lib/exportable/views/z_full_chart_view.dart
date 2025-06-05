@@ -41,9 +41,10 @@ class _ZFullChartViewState extends State<ZFullChartView> {
 
   _loadZParams() {
     var service = ZParamsServiceFactory.paramsService(context);
+    var builder = ZParamsServiceFactory.paramsBuilder(context);
     service.getByPageId(widget.pageId).then((savedParams) {
       if (savedParams == null) {
-        var params = ZParams.empty();
+        var params = builder.getEmpty();
         params.pageId = widget.pageId;
         service.addEntity(params).then((newSaved) {
           setState(() {

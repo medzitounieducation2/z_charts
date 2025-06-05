@@ -1,45 +1,21 @@
-import 'package:z_charts/exportable/enums/z_chart_type_enum.dart';
-import 'package:z_charts/exportable/enums/z_period_type_emun.dart';
-import 'package:z_charts/exportable/enums/z_time_unit_enum.dart';
-import 'package:z_charts/exportable/models/z_data_model.dart';
+import 'package:z_charts/exportable/models/z_data.dart';
 
-class ZParams extends ZDataModel {
-  dynamic pageId;
-  DateTime fromDate;
-  DateTime toDate;
-  String periodType;
-  String chartType;
-  String timeUnit;
+abstract class ZParams extends ZData {
+  get pageId;
+  set pageId(value);
 
-  static ZParams empty() => ZParams(
-    id: null,
-    periodType: PeriodTypeEnum.THIS_MONTH.name,
-    pageId: '',
-    timeUnit: TimeUnitEnum.DAY.name,
-    chartType: ChartTypeEnum.LINE.name,
-    fromDate: DateTime.now(),
-    toDate: DateTime.now(),
-  );
+  DateTime get fromDate;
+  set fromDate(DateTime value);
 
-  ZParams({
-    super.id,
-    required this.pageId,
-    required this.fromDate,
-    required this.toDate,
-    required this.chartType,
-    required this.timeUnit,
-    required this.periodType,
-  });
+  DateTime get toDate;
+  set toDate(DateTime value);
 
-  static ZParams clone(ZParams entity) {
-    return ZParams(
-      id: entity.id,
-      pageId: entity.pageId,
-      fromDate: entity.fromDate,
-      toDate: entity.toDate,
-      periodType: entity.periodType,
-      chartType: entity.chartType,
-      timeUnit: entity.timeUnit,
-    );
-  }
+  String get periodType;
+  set periodType(String value);
+
+  String get chartType;
+  set chartType(String value);
+
+  String get timeUnit;
+  set timeUnit(String value);
 }

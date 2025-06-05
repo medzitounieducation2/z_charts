@@ -30,7 +30,8 @@ class _ZParamsWidgetState extends State<ZParamsWidget> {
   @override
   void initState() {
     super.initState();
-    params = ZParams.clone(widget.chartParams);
+    var builder = ZParamsServiceFactory.paramsBuilder(context);
+    params = builder.clone(widget.chartParams);
   }
 
   saveParams() {
