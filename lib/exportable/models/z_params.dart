@@ -31,31 +31,6 @@ class ZParams extends ZDataModel {
     required this.periodType,
   });
 
-  @override
-  ZParams fromJson(Map<String, dynamic> json, dynamic id) {
-    return ZParams(
-      id: id,
-      pageId: json['pageId'],
-      fromDate: json['fromDate'],
-      toDate: json['toDate'],
-      chartType: json['chartType'],
-      timeUnit: json['timeUnit'],
-      periodType: json['periodType'],
-    );
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      'pageId': pageId,
-      'fromDate': fromDate,
-      'toDate': toDate,
-      'chartType': chartType,
-      'timeUnit': timeUnit,
-      'periodType': periodType,
-    };
-  }
-
   static ZParams clone(ZParams entity) {
     return ZParams(
       id: entity.id,

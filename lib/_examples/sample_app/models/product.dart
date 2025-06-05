@@ -26,21 +26,6 @@ class Product extends ZDataModel {
     id = null;
   }
 
-  @override
-  Product fromJson(Map<String, dynamic> json, dynamic id) {
-    return Product(
-      id: id,
-      unit: json['unit'],
-      value: json['value'],
-      timestamp: json['timestamp'],
-    );
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return {'unit': unit, 'value': value, 'timestamp': timestamp};
-  }
-
   static Product clone(Product entity) {
     return Product(
       id: entity.id,
